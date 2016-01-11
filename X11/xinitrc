@@ -2,6 +2,7 @@
 
 export TERMINAL=urxvtc
 
+xrdb ~/.Xresources
 urxvtd -q -f -o
 
 exec herbstluftwm
