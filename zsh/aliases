@@ -1,0 +1,48 @@
+# git aliases
+alias ga='git add'
+alias gb='git branch -vv'
+alias gc='git commit'
+alias gac='git commit -am'
+alias gd='git diff'
+alias gr='git reset HEAD'
+alias gl='git log --oneline --graph'
+alias glc='git log --name-only -1'          #Show the files changed in this commit
+glcm() { glc $1; git diff $1..$1~1; }       #Show the changes to the files in this commit
+alias glf='git log --oneline --name-only'   #Show the log with commit messages and files changed
+alias gm='git merge --ff-only'              #Shorthand git merge, with some safety
+alias gs='git status'
+alias gpom='git push origin master'
+
+# ls aliases
+alias ls='ls --color=auto'
+alias lA='ls -a'
+alias la='ls -A'
+alias la='ls -Alh'
+alias ll='ls -lh'
+alias llA='ll -a'
+alias lla='ll -A'
+
+alias hc=herbstclient
+
+# Change your X keyboard layout
+alias dvorak='setxkbmap dvorak'
+alias ppdv='setxkbmap ppdv'
+alias qwerty='setxkbmap us'
+
+alias suod=sudo
+alias sude=sudo -e
+alias suda=sudo
+
+alias servit='python2 -m SimpleHTTPServer 8000'
+
+# Print out all the colors your terminal can access
+alias allcolors='(x=`tput op` y=`printf %80s`;for i in {0..255};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done)'
+
+clangmake() {
+    CXX=clang CXXFLAGS+=" -std=c++11 -Wall -Wextra -c" make $1 && rm $1
+}
+
+# Pass in which host to close the connection to
+alias sshclose='ssh -O exit'
+
+# vim: set ft=sh:
