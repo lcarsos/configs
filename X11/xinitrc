@@ -1,0 +1,7 @@
+#!/bin/sh
+
+export TERMINAL=urxvtc
+
+urxvtd -q -f -o
+
+exec herbstluftwm
