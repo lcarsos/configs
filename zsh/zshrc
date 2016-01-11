@@ -29,3 +29,5 @@ bindkey -e
 
 export EDITOR=vim
 export TERMINAL=urxvtc
+
+source $HOME/.aliases
