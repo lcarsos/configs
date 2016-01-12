@@ -1,4 +1,35 @@
-# The following lines were added by compinstall
+man() {
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;31m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;32m") \
+                                 man "$@"
+}
+
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt nocaseglob extendedglob numericglobsort
+setopt appendhistory autocd histignoredups completealiases prompt_subst
+setopt braceccl # enables alphabet brace expansion
+setopt autolist automenu
+setopt complete_in_word
+unsetopt beep nomatch
+
+bindkey -e
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[7~" beginning-of-line       #for rxvt
+bindkey "^[[4~" end-of-line
+bindkey "^[[8~" end-of-line             #for rxvt
+bindkey "^[[5~" beginning-of-history
+bindkey "^[[6~" end-of-history
+bindkey "^[[2~" overwrite-mode
+bindkey "^[[3~" delete-char
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash yes
@@ -10,22 +41,56 @@ zstyle ':completion:*' original true
 zstyle ':completion:*' word true
 zstyle :compinstall filename '/home/lcarsos/.zshrc'
 
+#completion menu with color
+zmodload zsh/complist
+export ZLSCOLORS="${LS_COLORS}"
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" "ma=${${use_256color+1;7;38;5;143}:-1;7;33}"
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+
+# completion for killing processes
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:*:killall:*' menu yes select
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:*:*:processes' command "ps -u `whoami` -o pid,user,comm -w -w"
+
+zstyle ':completion:*:*:default' force-list always
+zstyle ':completion:*' select-prompt '%SSelect:  lines: %L  matches: %M  [%p]'
+
+# stop trying to complete to object files for vim
+zstyle ':completion:*:*:vim:*:*files' ignored-patterns '*.o'
+zstyle ':completion:*:*:gvim:*:*files' ignored-patterns '*.o'
+
+# limit completion to pdf files for mupdf
+zstyle ':completion:*:*:mupdf:*:*' file-patterns '*.pdf' '*(-/):directories'
+
+# Good stuff
 autoload -Uz compinit
 compinit
 
-# End of lines added by compinstall
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
-setopt appendhistory autocd histignoredups
-setopt nocaseglob extendedglob numericglobsort
-setopt braceccl
-setopt autolist automenu
-setopt complete_in_word
-unsetopt beep nomatch
-bindkey -e
-# End of lines configured by zsh-newuser-install
+autoload -U promptinit
+promptinit
+
+autoload -U colors && colors
+autoload -U zmv
+autoload -U tetris && zle -N tetris     # ^Xtetris
+
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
+# VCS Setup
+precmd() {
+    vcs_info
+}
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git hg
+zstyle ':vcs_info:*:*' check-for-changes true
+zstyle ':vcs_info:*:*' get-revision true
+zstyle ':vcs_info:*' formats "[%{$fg[yellow]%}%7.7i%{$reset_color%}][%b %m%u%c]"
+
+PROMPT="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%3~/ %{$reset_color%}%# "
+RPROMPT='${vcs_info_msg_0_}[%D{%H:%M}][%?]'
 
 export EDITOR=vim
 export TERMINAL=urxvtc
