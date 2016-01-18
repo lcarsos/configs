@@ -1,0 +1,49 @@
+alias dockre=docker
+alias dpg='docker ps -a | grep'
+
+# Making docker inspect not useless, requires `jq'
+di() {
+    local jq_opts=.
+    docker inspect $1 >/dev/null 2>&1
+    if [[ $? -ne 0 ]]; then
+        jq_opts=$1
+        shift 1
+    fi
+    docker inspect $@ | jq -C $jq_opts | less -RFX
+}
+alias divols='di .[].HostConfig.Binds'
+alias distate='di .[].State'
+alias diconf='di .[].Config'
+alias dienv='di .[].Config.Env'
+
+# Making docker logs less useless
+alias dl='docker logs --tail=20'
+alias dlf='docker logs --tail=20 -f'
+dlt() {
+    tail=$1
+    shift 1
+    docker logs --tail=$tail $@
+}
+dls() {
+    local amount=""
+    local scale=""
+    local container=""
+    if [[ $# -lt 2 ]]; then
+        amount=1
+        scale=minutes
+        container=$1
+    else
+        amount=${1:0:${#1}-1}
+        case "${1:${#1}-1:1}" in
+            s ) scale=seconds ;;
+            m ) scale=minutes ;;
+            h ) scale=hours ;;
+            d ) scale=days ;;
+            * ) scale=minutes ;;
+        esac
+        container=$2
+    fi
+    docker logs --since=$(date --date="-${amount} ${scale}" +%s) $container
+}
+
+# vim: set ft=sh:

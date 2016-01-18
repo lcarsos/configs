@@ -1,0 +1,9 @@
+alias ls='ls --color=auto'
+alias lA='ls -a'
+alias la='ls -A'
+alias la='ls -Alh'
+alias ll='ls -lh'
+alias llA='ll -a'
+alias lla='ll -A'
+
+# vim: set ft=sh:

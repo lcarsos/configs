@@ -1,0 +1,5 @@
+# whenever I fat-finger sudo it goes here
+alias suod=sudo
+alias suda=sudo
+
+alias sude=sudo -e
