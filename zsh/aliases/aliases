@@ -20,4 +20,6 @@ clangmake() {
 # Pass in which host to close the connection to
 alias sshclose='ssh -O exit'
 
+alias xargs='xargs -r'
+
 # vim: set ft=sh:

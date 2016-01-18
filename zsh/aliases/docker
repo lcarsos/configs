@@ -46,4 +46,7 @@ dls() {
     docker logs --since=$(date --date="-${amount} ${scale}" +%s) $container
 }
 
+alias rmcontainers="docker ps -a | grep Exited | awk -F '  +' '{ print $6; }' | grep -v '\.' | xargs docker rm"
+alias rminone="docker images --no-trunc | grep none | awk '{ print $3; }' | xargs docker rmi"
+
 # vim: set ft=sh:
