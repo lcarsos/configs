@@ -90,7 +90,7 @@ zstyle ':vcs_info:*:*' get-revision true
 zstyle ':vcs_info:*' formats "[%{$fg[yellow]%}%7.7i%{$reset_color%}][%b %m%u%c]"
 
 PROMPT="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%3~/ %{$reset_color%}%# "
-RPROMPT='${vcs_info_msg_0_}[%D{%H:%M}][%?]'
+RPROMPT='${vcs_info_msg_0_}[%D{%H:%M}][$(printf "%.3f" $(stardate))][%?]'
 
 export EDITOR=vim
 export TERMINAL=urxvtc
