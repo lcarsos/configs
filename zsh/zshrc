@@ -95,6 +95,6 @@ RPROMPT='${vcs_info_msg_0_}[%D{%H:%M}][%?]'
 export EDITOR=vim
 export TERMINAL=urxvtc
 
-for f in $(ls $HOME/c/zsh/{aliases,ignored}/*); do
+for f in $(ls $HOME/c/zsh/{aliases,functions,ignored}/*); do
     source $f
 done

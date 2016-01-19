@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+stardate() {
+    local seconds_since_jan=$(( $(date +%j) * 86400 + $(date +%H) * 3600 + $(date +%M) * 60 + $(date +%S) ))
+    local scaling_factor=31535.0
+    local lower=$(printf "%08.4f" $(( $seconds_since_jan / $scaling_factor )) )
+    echo $(date '+%y')$lower
+}
+
+# vim: set ft=sh:
