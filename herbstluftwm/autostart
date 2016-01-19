@@ -20,9 +20,10 @@ Mod=Mod4   # Use the super key as the main modifier
 
 hc keybind $Mod-Shift-q quit
 hc keybind $Mod-q       reload
-hc keybind $Mod-Shift-c close
-hc keybind $Mod-Return spawn urxvtc
-hc keybind $Mod-space spawn dmenu_run
+hc keybind $Mod-Shift-c close_or_remove
+hc keybind $Mod-Return  spawn urxvtc
+hc keybind $Mod-space   spawn dmenu_run
+hc keybind $Mod-Escape  spawn i3lock -c 000000
 
 # basic movement
 # focusing clients
@@ -34,6 +35,12 @@ hc keybind $Mod-h     focus left
 hc keybind $Mod-j     focus down
 hc keybind $Mod-k     focus up
 hc keybind $Mod-l     focus right
+
+# focusing monitors
+hc keybind $Mod-F1   focus_monitor 0
+hc keybind $Mod-F2   focus_monitor 1
+hc keybind $Mod-F3   focus_monitor 2
+hc keybind $Mod-F4   focus_monitor 3
 
 # moving clients
 hc keybind $Mod-Shift-Left  shift left
@@ -77,12 +84,19 @@ for i in ${!tag_names[@]} ; do
     fi
 done
 
+# focusing monitors
+hc keybind $Mod-Shift-F1   shift_to_monitor 0
+hc keybind $Mod-Shift-F2   shift_to_monitor 1
+hc keybind $Mod-Shift-F3   shift_to_monitor 2
+hc keybind $Mod-Shift-F4   shift_to_monitor 3
+
 # cycle through tags
 hc keybind $Mod-period use_index +1 --skip-visible
 hc keybind $Mod-comma  use_index -1 --skip-visible
 
 # layouting
 hc keybind $Mod-r remove
+hc keybind $Mod-Shift-r close_and_remove
 #hc keybind $Mod-space cycle_layout 1
 hc keybind $Mod-z set_layout vertical
 hc keybind $Mod-v set_layout horizontal
@@ -99,10 +113,12 @@ hc mousebind $Mod-Button2 zoom
 hc mousebind $Mod-Button3 resize
 
 # focus
-hc keybind $Mod-BackSpace   cycle_monitor
+hc keybind $Mod-BackSpace   cycle_monitor +1
+hc keybind $Mod-Shift-BackSpace   cycle_monitor -1
 hc keybind $Mod-Tab         cycle_all +1
 hc keybind $Mod-Shift-Tab   cycle_all -1
-hc keybind $Mod-c cycle
+hc keybind Mod1-Tab cycle +1
+hc keybind Mod1-Shift-Tab cycle -1
 hc keybind $Mod-i jumpto urgent
 
 # media keys
