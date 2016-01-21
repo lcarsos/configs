@@ -1,5 +1,11 @@
 alias dockre=docker
-alias dpg='docker ps -a | grep'
+dpg() {
+    # Take docker output, print the first line and any line matching $@
+    # Because docker ps is a bastard, recolumning (because ports are long)
+    # uses a sed to turn 2+ spaces into tabs and then use column to columnize
+    # on tab characters.
+    docker ps -a | sed "1p;/$@/!d" | sed "s/  \+/\t/g" | column -t -s $'\t'
+}
 
 # Making docker inspect not useless, requires `jq'
 di() {
@@ -11,10 +17,10 @@ di() {
     fi
     docker inspect $@ | jq -C $jq_opts | less -RFX
 }
-alias divols='di .[].HostConfig.Binds'
-alias distate='di .[].State'
-alias diconf='di .[].Config'
-alias dienv='di .[].Config.Env'
+alias divols='di ".[].HostConfig.Binds"'
+alias distate='di ".[].State"'
+alias diconf='di ".[].Config"'
+alias dienv='di ".[].Config.Env"'
 
 # Making docker logs less useless
 alias dl='docker logs --tail=20'
