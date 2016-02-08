@@ -1,4 +1,6 @@
 alias dockre=docker
+
+# making docker ps output less useless
 dpg() {
     # Take docker output, print the first line and any line matching $@
     # Because docker ps is a bastard, recolumning (because ports are long)
@@ -38,7 +40,7 @@ dl() {
     docker logs --tail=${tail} $@
 }
 alias dlf='dl -f'
-dls() {
+dls() { # short for docker log since
     local amount=""
     local scale=""
     local container=""
