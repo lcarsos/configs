@@ -7,6 +7,12 @@ dpg() {
     docker ps -a | sed "1p;/$@/!d" | sed "s/  \+/\t/g" | column -t -s $'\t'
 }
 
+# docker images accepts an image name as a filter but requires an exact match.
+# this makes docker images less useless (it doesn't fix the slowness problem)
+dim() { # I can't call this di (see below), and I can't call it dig (dns util)
+    docker images | sed "1p;/$@/!d" | sed "s/  \+/\t/g" | column -t -s $'\t'
+}
+
 # Making docker inspect not useless, requires `jq'
 di() {
     local jq_opts=.
@@ -23,13 +29,15 @@ alias diconf='di ".[].Config"'
 alias dienv='di ".[].Config.Env"'
 
 # Making docker logs less useless
-alias dl='docker logs --tail=20'
-alias dlf='docker logs --tail=20 -f'
-dlt() {
-    tail=$1
-    shift 1
-    docker logs --tail=$tail $@
+dl() {
+    local tail=20
+    if [[ $# -gt 1 ]]; then
+        tail=$1
+        shift 1
+    fi
+    docker logs --tail=${tail} $@
 }
+alias dlf='dl -f'
 dls() {
     local amount=""
     local scale=""
@@ -38,6 +46,7 @@ dls() {
         amount=1
         scale=minutes
         container=$1
+        shift 1
     else
         amount=${1:0:${#1}-1}
         case "${1:${#1}-1:1}" in
@@ -48,8 +57,19 @@ dls() {
             * ) scale=minutes ;;
         esac
         container=$2
+        shift 2
     fi
-    docker logs --since=$(date --date="-${amount} ${scale}" +%s) $container
+    docker logs --since=$(date --date="-${amount} ${scale}" +%s) $@ $container
+}
+
+de() {
+    docker exec -it $@ /bin/bash
+}
+
+# I don't bloody care about this container. End it. I'm going to be replacing it.
+dend() {
+    docker kill $@
+    docker rm $@
 }
 
 alias rmcontainers="docker ps -a | grep Exited | awk -F '  +' '{ print $6; }' | grep -v '\.' | xargs docker rm"
