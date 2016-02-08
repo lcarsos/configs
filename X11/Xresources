@@ -194,4 +194,6 @@ URxvt*termName        : xterm-256color
 ! xcursor settings
 Xcursor.size	:	16
 
+Xft.dpi: 92
+
 ! vim: ft=xdefaults
