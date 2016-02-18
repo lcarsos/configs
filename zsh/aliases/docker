@@ -55,27 +55,33 @@ dl() {
 }
 alias dlf='dl -f'
 dls() { # short for docker log since
+    # Usage: dls time container
+    #   time:      how far back you want to go. Supports whole seconds,
+    #              minutes, hours, and days
+    #   container: the name of the container you want logs since
+    # You MUST specify a time value. Everything else is passed through to
+    # docker logs
+    # Examples:
+    #   dls 5m container    # Gives you the last 5 minutes of logs
+    #   dls 1h container    # Gives you the last 1 hour of logs
+    #   dls 5m -t container # You can pass through any options to docker logs
+    #   dls 5 container     # If you specify only number dls defaults to minutes
     local amount=""
     local scale=""
-    local container=""
     if [[ $# -lt 2 ]]; then
-        amount=1
-        scale=minutes
-        container=$1
-        shift 1
-    else
-        amount=${1:0:${#1}-1}
-        case "${1:${#1}-1:1}" in
-            s ) scale=seconds ;;
-            m ) scale=minutes ;;
-            h ) scale=hours ;;
-            d ) scale=days ;;
-            * ) scale=minutes ;;
-        esac
-        container=$2
-        shift 2
+        >2 echo "You must specify a time"
+        return 1
     fi
-    docker logs --since=$(date --date="-${amount} ${scale}" +%s) $@ $container
+    amount=${1:0:${#1}-1}
+    case "${1:${#1}-1:1}" in
+        s ) scale=seconds ;;
+        m ) scale=minutes ;;
+        h ) scale=hours ;;
+        d ) scale=days ;;
+        * ) scale=minutes ;;
+    esac
+    shift 1
+    docker logs --since=$(date --date="-${amount} ${scale}" +%s) $@
 }
 
 de() {
