@@ -82,6 +82,13 @@ de() {
     docker exec -it $@ /bin/bash
 }
 
+dr() {
+    docker run -it --rm --entrypoint=/bin/bash $@
+}
+drsh() { # In case the image doesn't have bash
+    docker run -it --rm --entrypoint=/bin/sh $@
+}
+
 # I don't bloody care about this container. End it. I'm going to be replacing it.
 dend() {
     docker kill $@
