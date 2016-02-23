@@ -1,5 +1,5 @@
 ! Tomorrow-Night Bright Palette
-#define t_background_trans [85]#000000
+#define t_background_trans [75]#000000
 #define t_background #000000
 #define t_current_line #2a2a2a
 #define t_selection #424242
@@ -17,33 +17,33 @@
 #define t_purple #C397D8
 #define t_magenta #B777E0
 
-*.background: t_background_trans
-*.foreground: t_foreground
-*.cursorColor: #AEAFAD
+URxvt.background: t_background_trans
+URxvt.foreground: t_foreground
+URxvt.cursorColor: #AEAFAD
 ! black
-*.color0:  t_background
-*.color8:  #666666
+URxvt.color0:  t_background
+URxvt.color8:  #666666
 ! red
-*.color1:  t_brightred
-*.color9:  t_red
+URxvt.color1:  t_brightred
+URxvt.color9:  t_red
 ! green
-*.color2:  t_green
-*.color10: t_brightgreen
+URxvt.color2:  t_green
+URxvt.color10: t_brightgreen
 ! yellow
-*.color3:  t_orange
-*.color11: t_yellow
+URxvt.color3:  t_orange
+URxvt.color11: t_yellow
 ! blue
-*.color4:  t_blue
-*.color12: t_blue
+URxvt.color4:  t_blue
+URxvt.color12: t_blue
 ! magenta
-*.color5:  t_purple
-*.color13: t_magenta
+URxvt.color5:  t_purple
+URxvt.color13: t_magenta
 ! cyan
-*.color6:  t_aqua
-*.color14: t_cyan
+URxvt.color6:  t_aqua
+URxvt.color14: t_cyan
 ! white
-*.color7:  t_selection
-*.color15: t_current_line
+URxvt.color7:  t_selection
+URxvt.color15: t_current_line
 
 ! urxvt specific settings
 URxvt*scrollBar       : off
