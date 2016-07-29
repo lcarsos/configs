@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+rotate() {
+    local file=$(shift 1)
+    local rotatemax=9
+    local maxsize=2097152
+    local filesize=$(wc -c $file | cut -f 1 -d ' ')
+
+    if [[ $filesize -gt $maxsize ]]; then
+        if [[ -s ${file}.1 ]]; then
+            gzip ${file}.1
+        fi
+        for i in {$rotatemax..1}; do
+            if [[ -s ${file}.${i}.gz ]]; then
+                mv ${file}.${i}.gz ${file}.$(( i + 1 )).gz
+            fi
+        done
+    fi
+}
