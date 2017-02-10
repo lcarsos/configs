@@ -9,6 +9,11 @@ dpg() {
     docker ps -a | sed "1p;/$@/!d" | sed "s/  \+/\t/g" | column -t -s $'\t'
 }
 
+# print out all the running containers, and their IP Address
+dpsip() {
+    docker inspect $(docker ps -q) | jq 'map({(.Name): .NetworkSettings.IPAddress}) | add'
+}
+
 # docker images accepts an image name as a filter but requires an exact match.
 # this makes docker images less useless (it doesn't fix the slowness problem)
 dim() { # I can't call this di (see below), and I can't call it dig (dns util)
