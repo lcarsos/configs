@@ -123,12 +123,17 @@ hc keybind $Mod-i jumpto urgent
 
 # media keys
 hc keybind XF86AudioMute spawn ponymix toggle
+hc keybind XF86AudioLowerVolume spawn ponymix decrease 2
+hc keybind XF86AudioRaiseVolume spawn ponymix increase 2
 hc keybind XF86LowerVolume spawn ponymix decrease 2
 hc keybind XF86RaiseVolume spawn ponymix increase 2
 hc keybind XF86AudioPlay spawn mpc toggle
 hc keybind XF86AudioStop spawn mpc stop
 hc keybind XF86AudioPrev spawn mpc prev
 hc keybind XF86AudioNext spawn mpc next
+
+hc keybind XF86MonBrightnessUp spawn xbacklight -inc 5
+hc keybind XF86MonBrightnessDown spawn xbacklight -dec 5
 
 # theme
 hc attr theme.tiling.reset 1
