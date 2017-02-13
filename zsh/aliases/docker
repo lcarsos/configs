@@ -1,5 +1,7 @@
 alias dockre=docker
 
+alias dps='docker ps -a'
+
 # making docker ps output less useless
 dpg() {
     # Take docker output, print the first line and any line matching $@
@@ -118,7 +120,7 @@ dend() {
     docker rm $@
 }
 
-rmcontainers() { docker ps -a | grep Exited | awk -F '  +' '{ print $6; }' | grep -v '\.' | xargs docker rm }
-rminone() { docker images --no-trunc | grep none | awk '{ print $3; }' | xargs docker rmi }
+rmcontainers() { docker ps -aqf status=exited --no-trunc | xargs docker rm }
+rminone() { docker images -qf dangling=true --no-trunc | xargs docker rmi }
 
 # vim: set ft=sh:

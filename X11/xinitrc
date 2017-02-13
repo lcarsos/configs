@@ -5,8 +5,8 @@ export TERMINAL=urxvtc
 xrdb ~/.Xresources
 compton -CG -b
 urxvtd -q -f -o
-xcape
-xmodmap -e 'keycode 37 =' # Untraining muscle memory to use closer control
+xcape -e 'Control_L=Escape' -t 250
+#xmodmap -e 'keycode 37 =' # Untraining muscle memory to use closer control
 #xmodmap -e 'keycode 37 = Control_L NoSymbol Control_L' # Undo button ;p
 
 exec herbstluftwm

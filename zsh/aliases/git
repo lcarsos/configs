@@ -6,6 +6,7 @@ alias gb='git branch -vv'
 alias gc='git commit'
 alias gh='git checkout'
 alias gd='git diff'
+alias gdq='git diff --name-only'
 alias gl='git log --oneline --graph'
 alias glc='git log --name-only -1'          #Show the files changed in this commit
 glcm() { glc $1; git diff $1..$1~1; }       #Show the changes to the files in this commit
