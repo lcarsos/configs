@@ -102,9 +102,10 @@ hc keybind $Mod-z set_layout vertical
 hc keybind $Mod-v set_layout horizontal
 hc keybind $Mod-w set_layout grid
 hc keybind $Mod-m set_layout max
-hc keybind $Mod-s floating toggle
+hc keybind $Mod-s spawn ~/c/herbstluftwm/summon_cursor.sh
 hc keybind $Mod-f fullscreen toggle
 hc keybind $Mod-p pseudotile toggle
+#hc keybind $Mod-s floating toggle
 
 # mouse
 hc mouseunbind --all
