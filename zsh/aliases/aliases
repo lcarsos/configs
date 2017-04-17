@@ -22,4 +22,6 @@ alias sshclose='ssh -O exit'
 
 alias xargs='xargs -r'
 
+alias :e=vim
+
 # vim: set ft=sh:
