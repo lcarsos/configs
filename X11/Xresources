@@ -54,8 +54,8 @@ URxvt*keysym.C-equal  : perl:font-size:increase
 URxvt*keysym.C-minus  : perl:font-size:decrease
 URxvt*font-size.step  : 1
 URxvt*urlLauncher     : /usr/bin/firefox
-URxvt*font            : xft:Inconsolatazi4:size=10:antialias=false
-URxvt*boldfont        : xft:Inconsolatazi4:bold:size=10:antialias=false
+URxvt*font            : xft:Inconsolata:size=9
+URxvt*boldfont        : xft:Inconsolata:bold:size=9
 URxvt*termName        : xterm-256color
 ! URxvt*transparent    : true
 ! URxvt*shading        : 12
