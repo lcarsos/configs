@@ -59,7 +59,7 @@ zstyle ':completion:*:*:default' force-list always
 zstyle ':completion:*' select-prompt '%SSelect:  lines: %L  matches: %M  [%p]'
 
 # stop trying to complete to object files for vim
-zstyle ':completion:*:*:vim:*:*files' ignored-patterns '*.o'
+zstyle ':completion:*:*:vim:*:*files' ignored-patterns '*.o' '*,cover'
 zstyle ':completion:*:*:gvim:*:*files' ignored-patterns '*.o'
 
 # limit completion to pdf files for mupdf
