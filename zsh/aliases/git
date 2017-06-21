@@ -12,8 +12,21 @@ alias glc='git log --name-only -1'          #Show the files changed in this comm
 glcm() { glc $1; git diff $1..$1~1; }       #Show the changes to the files in this commit
 alias glf='git log --oneline --name-only'   #Show the log with commit messages and files changed
 alias gm='git merge --ff-only'              #Shorthand git merge, with some safety
-alias gs='git status'
+alias g='git status'
 alias gp='git push'
 alias gpom='git push origin master'
+
+alias gs='git stash list'
+alias gss='git stash save'
+gsa() {
+    [[ $# -ne 1 ]] && { 2&> echo "gsa requires 1 argument: the stash number"; return 2; }
+    git stash apply "stash@{$1}"
+    return $?
+}
+gsp() {
+    [[ $# -ne 1 ]] && { 2&> echo "gsp requires 1 argument: the stash number"; return 2; }
+    git stash pop "stash@{$1}"
+    return $?
+}
 
 # vim: set ft=sh:
