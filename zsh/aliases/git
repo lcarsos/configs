@@ -1,30 +1,47 @@
+alias g='git status'
 alias ga='git add'
+alias gf='git fetch'
+
+# REMOTES
+alias gre='git remote -v'
+
+# Reset and other destructive tendencies
 alias gr='git reset HEAD'
 alias grf='git reset HEAD --force'
+
+# Branching, committing
+alias gc='git commit'
 alias gac='git commit -am'
 alias gb='git branch -vv'
-alias gc='git commit'
 alias gh='git checkout'
+alias gm='git merge --ff-only'              #Shorthand git merge, with some safety
+alias gump='git fetch upstream && git push origin upstream/master:master'
+# Poll upstream, update master locally and in origin.
+# TODO: doesn't work if checked out to master
+alias glhf='git fetch upstream && git push origin upstream/master:master && git fetch origin master:master'
+alias gfomm='git fetch origin master:master'
+
+# History and depth diving
 alias gd='git diff'
 alias gdq='git diff --name-only'
 alias gl='git log --oneline --graph'
+alias glm='git log --oneline --graph master..'
 alias glc='git log --name-only -1'          #Show the files changed in this commit
 glcm() { glc $1; git diff $1..$1~1; }       #Show the changes to the files in this commit
 alias glf='git log --oneline --name-only'   #Show the log with commit messages and files changed
-alias gm='git merge --ff-only'              #Shorthand git merge, with some safety
-alias g='git status'
 alias gp='git push'
 alias gpom='git push origin master'
 
+# Stashing
 alias gs='git stash list'
 alias gss='git stash save'
 gsa() {
-    [[ $# -ne 1 ]] && { 2&> echo "gsa requires 1 argument: the stash number"; return 2; }
+    [[ $# -ne 1 ]] && { >&2 echo "gsa requires 1 argument: the stash number"; return 2; }
     git stash apply "stash@{$1}"
     return $?
 }
 gsp() {
-    [[ $# -ne 1 ]] && { 2&> echo "gsp requires 1 argument: the stash number"; return 2; }
+    [[ $# -ne 1 ]] && { >&2 echo "gsp requires 1 argument: the stash number"; return 2; }
     git stash pop "stash@{$1}"
     return $?
 }

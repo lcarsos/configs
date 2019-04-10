@@ -24,10 +24,11 @@ dim() { # I can't call this di (see below), and I can't call it dig (dns util)
 
 # List out all the layers in this image
 dimlayers() {
+    local lookup
     for image in $@; do
         echo $image
         echo -e "CREATED\t\t\t\tIMAGE\t\t\t\t\t\t\t\t  TAGS"
-        local lookup=$image
+        lookup=$image
         while [[ $lookup != "" ]]; do
             docker inspect -f "{{.Created}}  {{.Id}}  {{.RepoTags}}" $lookup | sed 's/  /\t/'
             lookup=$(docker inspect -f "{{.Parent}}" $lookup)
