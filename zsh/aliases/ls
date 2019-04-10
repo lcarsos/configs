@@ -1,4 +1,8 @@
-alias ls='ls --color=auto'
+if [[ "$OSTYPE" != "darwin"* ]]; then
+    alias ls='ls -G'
+elif
+    alias ls='ls --color=auto'
+fi
 alias lA='ls -a'
 alias la='ls -A'
 alias la='ls -Alh'
