@@ -100,13 +100,13 @@ RPROMPT='${vcs_info_msg_0_}[%D{%H:%M}][$(printf "%.3f" $(stardate))][%?]'
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     export EDITOR=nvim
-elif
+else
     export EDITOR=vim
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     export TERMINAL=iterm
-elif
+else
     export TERMINAL=urxvtc
 fi
 
