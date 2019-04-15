@@ -114,6 +114,12 @@ export LC_COLLATE=C
 
 ############## IMPORTS #################
 
-for f in $(ls $HOME/.zsh/{aliases,functions,ignored}/*); do
-    source $f
-done
+resource_configs() {
+    # DANGER: repeatedly calling this function will not clean up previous calls.
+    # You are likely to pollute your variables and definitions.
+    for f in $(ls $HOME/.zsh/{aliases,functions,ignored}/*); do
+        source $f
+    done
+}
+
+resource_configs
