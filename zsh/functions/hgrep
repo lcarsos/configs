@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# grep through the input, but also preserve the header line
+hgrep() {
+    head -n 1
+    grep $@
+    return $?
+}
