@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+# Move a file to the same name, but with the second argument appended to the end
+# Example:
+#   append build.xcactivitylog .gz
+# Will take the file build.xcactivitylog and move it to be named
+# build.xcacivitylog.gz
+append() {
+    mv ${1} ${1}${2}
+}
