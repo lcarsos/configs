@@ -26,4 +26,7 @@ fi
 
 alias :e=vim
 
+# By default I don't care to search through minified files
+alias ag="ag --width 120"
+
 # vim: set ft=sh:

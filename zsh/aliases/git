@@ -13,6 +13,7 @@ alias grf='git reset HEAD --force'
 alias gc='git commit'
 alias gac='git commit -am'
 alias gb='git branch -vv'
+alias gbp='git rev-parse --abbrev-ref HEAD'
 alias gh='git checkout'
 alias gm='git merge --ff-only'              #Shorthand git merge, with some safety
 alias gump='git fetch upstream && git push origin upstream/master:master'
@@ -20,6 +21,7 @@ alias gump='git fetch upstream && git push origin upstream/master:master'
 # TODO: doesn't work if checked out to master
 alias glhf='git fetch upstream && git push origin upstream/master:master && git fetch origin master:master'
 alias gfomm='git fetch origin master:master'
+gdummypush() { ga . && gc -m '.' && git push }
 
 # History and depth diving
 alias gd='git diff'
@@ -44,6 +46,27 @@ gsp() {
     [[ $# -ne 1 ]] && { >&2 echo "gsp requires 1 argument: the stash number"; return 2; }
     git stash pop "stash@{$1}"
     return $?
+}
+
+# Worktrees
+alias gw='git worktree list'
+
+gi() {
+    g
+    echo "--(branches)-------------"
+    gb
+    echo "--(stashes)--------------"
+    gs
+    echo "--(worktrees)------------"
+    gw
+}
+
+gbcleanup() {
+    [[ $# -ne 1 ]] && { >&2 echo "$0 requires 1 argument: the branch name"; return 2; }
+    local branch=$1
+    shift 1
+    git push --delete origin $branch
+    git branch -D $branch
 }
 
 # vim: set ft=sh:

@@ -121,6 +121,26 @@ dend() {
     docker rm $@
 }
 
+dpull() {
+    usage() {
+        echo "usage: dpull"
+    }
+    [ $# -eq 0 ] && { >&2 usage; return 1; }
+
+    image=$1
+    shift 1
+    #output(
+
+    return 0
+}
+
+_dpull_background() {
+    docker pull $1  | tee /dev/stderr
+    return ${PIPESTATUS[0]}
+}
+
+alias dprune="docker system prune --volumes -f"
+
 rmcontainers() { docker ps -aqf status=exited --no-trunc | xargs docker rm }
 rminone() { docker images -qf dangling=true --no-trunc | xargs docker rmi }
 
