@@ -1,0 +1,38 @@
+## Automation around running a local jenkins instance in docker containers
+
+if [[ -d "$HOME/code/jenkins/dsl-jobs" ]]; then
+
+reseed() {
+    local ci_system jenkins_url crumb_res crumb_header addl_opts current_branch
+
+    # TODO refactor this to be local to work machine, not on public github
+    ci_system="pt-mobile"
+    if [[ $# -gt 0 ]]; then
+        current_branch=$1
+    else
+        # TODO pull this path from an envvar to make this more generic and reusable
+        current_branch="$(git -C ~/code/jenkins/dsl-jobs rev-parse --abbrev-ref HEAD)"
+    fi
+
+    #[[ -z $ci_system ]] && { >&2 echo "No ci system running"; return 1; }
+
+    local jenkins_url="http://localhost/${ci_system}"
+
+    # get crumb. This API call returns a response like this: {"_class":"hudson.security.csrf.DefaultCrumbIssuer","crumb":"96f0fc301239e89258e94a19d105f2d6","crumbRequestField":"Jenkins-Crumb"}
+    # Curl the endpoint and use sed to parse the fields and put it into the format 'header_name:header_value' for curl
+    crumb_header=$(curl -sL $jenkins_url/crumbIssuer/api/json | sed 's/.*crumb":"\([^"]*\)","crumbRequestField":"\([^"]*\)".*/\2:\1/')
+    req_headers="-H ${crumb_header}"
+
+    echo "Rebuilding jenkins seed-job with branch $current_branch"
+
+    # I need to do all of this craziness to get around the 'header folding' issue
+    # that occurs when I directly send the curl command w/ the crumb header from
+    # zsh for some unknown reason
+    local json_data="'"'json={"parameter":[{"name":"branch","value":"'"${current_branch}"'"}]}'"'"
+    local curl_cmd="curl --fail -X POST ${req_headers} --data-urlencode ${json_data} ${jenkins_url}/job/seed-job/build"
+    printf $curl_cmd | bash
+}
+
+fi
+
+# vim: set ft=zsh :
