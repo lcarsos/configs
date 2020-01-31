@@ -18,7 +18,7 @@ alias gh='git checkout'
 alias gm='git merge --ff-only'              #Shorthand git merge, with some safety
 alias gump='git fetch upstream && git push origin upstream/master:master'
 # Poll upstream, update master locally and in origin.
-# TODO: doesn't work if checked out to master
+# TODO: doesn't work if checked out to master, use `gump && git pull` as a workaround
 alias glhf='git fetch upstream && git push origin upstream/master:master && git fetch origin master:master'
 alias gfomm='git fetch origin master:master'
 gdummypush() { ga . && gc -m '.' && git push }
@@ -28,6 +28,8 @@ alias gd='git diff'
 alias gdq='git diff --name-only'
 alias gl='git log --oneline --graph'
 alias glm='git log --oneline --graph master..'
+alias glms='git log --oneline --graph --name-status master..'
+alias glmp='git log --oneline --graph -p master..'
 alias glc='git log --name-only -1'          #Show the files changed in this commit
 glcm() { glc $1; git diff $1..$1~1; }       #Show the changes to the files in this commit
 alias glf='git log --oneline --name-only'   #Show the log with commit messages and files changed
@@ -50,6 +52,25 @@ gsp() {
 
 # Worktrees
 alias gw='git worktree list'
+# Find the git directory in the case where toplevel .git is not the git directory
+gdir() {
+    local GIT_ROOT=`git rev-parse --show-toplevel`
+    [[ -z $GIT_ROOT ]] && return 1
+
+    if [[ -d "$GIT_ROOT/.git" ]]; then
+        local GIT_WORKTREE_DIR="$GIT_ROOT/.git"
+    else
+        local GIT_WORKTREE_DIR=$(cat $GIT_ROOT/.git | cut -f 2 -d' ')
+    fi
+
+    if [[ -f "$GIT_WORKTREE_DIR/commondir" ]]; then
+        local GIT_DIR="$GIT_WORKTREE_DIR/$(cat $GIT_WORKTREE_DIR/commondir)"
+    else
+        local GIT_DIR="$GIT_WORKTREE_DIR"
+    fi
+
+    echo $GIT_DIR
+}
 
 gi() {
     g
