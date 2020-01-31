@@ -3,7 +3,7 @@
 # Provide an initializer for sdkman rather than having it bully its way into
 # every zsh session.
 
-sdkman_init() {
+init_sdkman() {
     export SDKMAN_DIR="$HOME/.sdkman"
     [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 }

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Provide an initializer for rbenv
+
+init_rbenv() {
+    eval "$(rbenv init -)"
+}
