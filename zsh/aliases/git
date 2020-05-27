@@ -12,10 +12,14 @@ alias grf='git reset HEAD --force'
 # Branching, committing
 alias gc='git commit'
 alias gac='git commit -am'
+alias gcam='git commit --amend --no-edit'
+alias gcamp='git commit --amend --no-edit && git push -f'
+alias gacamp='git add . && git commit --amend --no-edit && git push -f'
 alias gb='git branch -vv'
 alias gbp='git rev-parse --abbrev-ref HEAD'
 alias gh='git checkout'
 alias gm='git merge --ff-only'              #Shorthand git merge, with some safety
+alias grc='git rebase --continue'
 alias gump='git fetch upstream && git push origin upstream/master:master'
 # Poll upstream, update master locally and in origin.
 # TODO: doesn't work if checked out to master, use `gump && git pull` as a workaround
@@ -33,7 +37,16 @@ alias glmp='git log --oneline --graph -p master..'
 alias glc='git log --name-only -1'          #Show the files changed in this commit
 glcm() { glc $1; git diff $1..$1~1; }       #Show the changes to the files in this commit
 alias glf='git log --oneline --name-only'   #Show the log with commit messages and files changed
+alias gul='git pull'
+alias guldukat='git pull --rebase'
 alias gp='git push'
+gpr() {
+    # git push to remote
+    [[ $# -lt 1 ]] && { >&2 echo "$0 requires 1 argument: the remote name. One of:"; git remote; return 2; }
+    local remote=$1
+    shift
+    git push -u $remote `git rev-parse --abbrev-ref HEAD` $@
+}
 alias gpom='git push origin master'
 
 # Stashing
