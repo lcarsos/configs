@@ -2,6 +2,13 @@ alias dockre=docker
 
 alias dps='docker ps -a'
 
+dockls() {
+    docker container ls
+    docker image ls
+    docker volume ls
+    docker network ls
+}
+
 # making docker ps output less useless
 dpg() {
     # Take docker output, print the first line and any line matching $@
@@ -141,6 +148,7 @@ _dpull_background() {
 
 alias dprune="docker system prune --volumes -f"
 
+alias dpaq='docker ps -aq | xargs docker rm -fv'
 rmcontainers() { docker ps -aqf status=exited --no-trunc | xargs docker rm }
 rminone() { docker images -qf dangling=true --no-trunc | xargs docker rmi }
 
