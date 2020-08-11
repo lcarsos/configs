@@ -21,8 +21,8 @@ Mod=Mod4   # Use the super key as the main modifier
 hc keybind $Mod-Shift-q quit
 hc keybind $Mod-q       reload
 hc keybind $Mod-Shift-c close_or_remove
-hc keybind $Mod-Return  spawn urxvtc
-hc keybind $Mod-space   spawn dmenu_run
+hc keybind $Mod-Return  spawn alacritty
+hc keybind $Mod-space   spawn bemenu-run
 hc keybind $Mod-Escape  spawn i3lock -c 000000
 
 # basic movement
