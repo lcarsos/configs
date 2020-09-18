@@ -34,4 +34,8 @@ fi
 # By default I don't care to search through minified files
 alias ag="ag --width 120"
 
+alias jcops="jc-cli --ops"
+
+alias xz="xz $XZ_OPTS"
+
 # vim: set ft=sh:

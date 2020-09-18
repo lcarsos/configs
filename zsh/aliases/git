@@ -4,6 +4,10 @@ alias gf='git fetch'
 
 # REMOTES
 alias gre='git remote -v'
+glsremotedate() {
+    remote=${1?provide a remote name}
+    git ls-remote -h $remote 2> /dev/null | awk '{ system("git show --no-patch --no-notes --pretty='"'"'%cs'"'"' " $1 "  | tr -d '"'"'\n'"'"'"); print "\t" $0; }'
+}
 
 # Reset and other destructive tendencies
 alias gr='git reset HEAD'

@@ -115,7 +115,12 @@ elif [[ `command -v urxvt` ]]; then
     export TERMINAL=urxvt
 fi
 
+if command -v pyenv > /dev/null 2>&1 ; then
+    export PYENV_ROOT=$(pyenv root)
+fi
+
 export LC_COLLATE=C
+export XZ_OPTS="--threads=0"
 
 if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"

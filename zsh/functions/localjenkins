@@ -35,4 +35,13 @@ reseed() {
 
 fi
 
+attach() {
+    local jenkins_url="http://localhost/${ci_system}"
+    crumb_header=$(curl -sL $jenkins_url/crumbIssuer/api/json | sed 's/.*crumb":"\([^"]*\)","crumbRequestField":"\([^"]*\)".*/\2:\1/')
+    req_headers="-H ${crumb_header}"
+
+    local curl_cmd="curl --fail -X POST ${req_headers} --data-urlencode ${json_data} ${jenkins_url}/job/seed-job/build"
+    printf $curl_cmd | bash
+}
+
 # vim: set ft=zsh :
