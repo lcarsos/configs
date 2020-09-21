@@ -1,3 +1,0 @@
-set gui toolbars=none
-nmap , gT
-nmap . gt
