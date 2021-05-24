@@ -1,0 +1,11 @@
+# Shuttle Provisioning Profiles through security to decode the binary bits so
+# PlistBuddy doesn't barf on the file
+provisionplist() {
+    local tempfile=$(mktemp)
+    trap "rm -f -- $tempfile" EXIT
+
+    security cms -D -i ${1?Provide a Provisioning Profile} > $tempfile
+    /usr/libexec/PlistBuddy -c "Print ${2-}" $tempfile
+}
+
+# vim: set ft=zsh :
