@@ -1,5 +1,7 @@
 # Read `man 5 sway` for a complete reference.
 
+xwayland enable
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -27,17 +29,20 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 output DP-1 {
-    scale 1.3
+    scale 1.0
     position 0,0
 }
-output DP-2 {
-    scale 1
-    position 2953,0
-    mode 2560x1440@143.972000Hz
+output eDP-1 {
+    scale 1.75
+    position 1920,0
 }
-output DP-3 {
-    scale 1.3
-    position 5513,0
+
+output "BenQ Corporation BenQ EW2775ZH G3H00369SL0" {
+    scale 1.5
+}
+
+output "Goldstar Company Ltd LG TV SSCR 0x00000101" {
+    resolution 1920x1080@120.000000Hz
 }
 
 ### Idle configuration
@@ -54,6 +59,12 @@ output DP-3 {
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
+exec swayidle -w \
+    timeout 300 'light -O; light -S 3' \
+         resume 'light -I' \
+    timeout 600 'swaymsg "output * dpms off"' \
+         resume 'swaymsg "output * dpms on"; light -I'
+
 ### Input configuration
 #
 # Example configuration:
@@ -68,11 +79,16 @@ output DP-3 {
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input * xkb_layout "us"
-#input * xkb_variant "dvorak"
+input * xkb_variant "dvorak"
 input * xkb_options "compose:menu,caps:ctrl_modifier"
 input * xkb_numlock enabled
 
-input * scroll_factor 1.7
+input * scroll_factor 1.3
+
+input * tap enabled
+input * tap_button_map lrm
+
+input "1386:18698:Wacom_HID_490A_Finger" map_to_output eDP-1
 
 ### Key bindings
 #
@@ -80,6 +96,7 @@ input * scroll_factor 1.7
 #
 # Start a terminal
 bindsym $mod+Return exec $term
+bindsym $mod+b exec MOZ_ENABLE_WAYLAND=1 firefox
 
 # Kill focused window
 bindsym $mod+Shift+c kill
@@ -118,12 +135,12 @@ bindsym $mod+Shift+e exit
     bindsym $mod+Tab focus next
     bindsym $mod+Shift+Tab focus prev
 
-    bindsym $mod+F1 focus output DP-1
-    bindsym $mod+F2 focus output DP-2
+    bindsym $mod+F1 focus output eDP-1
+    bindsym $mod+F2 focus output DP-1
     bindsym $mod+F3 focus output DP-3
 
-    bindsym $mod+Shift+F1 move workspace to output DP-1
-    bindsym $mod+Shift+F2 move workspace to output DP-2
+    bindsym $mod+Shift+F1 move workspace to output eDP-1
+    bindsym $mod+Shift+F2 move workspace to output DP-1
     bindsym $mod+Shift+F3 move workspace to output DP-3
 
     # Move the focused window with the same, but add Shift
@@ -174,8 +191,8 @@ bindsym $mod+Shift+e exit
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
     bindsym $mod+v splitv
+    bindsym $mod+z splith
 
     # Switch the current container between different layout styles
     #bindsym $mod+s layout stacking
@@ -241,7 +258,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    status_command while ~/.config/sway/status.sh; do sleep 3; done
 
     colors {
         statusline #ffffff
