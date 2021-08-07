@@ -1,3 +1,9 @@
 alias swayconf="$EDITOR ~/.config/sway/config"
 
+if [[ -z ${WAYLAND_DISPLAY} && ${WAYLAND_DISPLAY} == wayland-1 ]]; then
+    # I will never remember imv. feh is too embedded in my brain.
+    # Good job at naming, feh developer!
+    alias feh=imv
+fi
+
 #set: ft=sh:

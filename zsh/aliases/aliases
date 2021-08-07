@@ -1,11 +1,5 @@
-alias hc=herbstclient
-
-# Change your X keyboard layout
-alias dvorak='setxkbmap dvorak'
-alias ppdv='setxkbmap ppdv'
-alias qwerty='setxkbmap us'
-
-alias servit='python2 -m SimpleHTTPServer 8000'
+# By default I don't care to search through minified files
+alias ag="ag --width 120"
 
 # Print out all the colors your terminal can access
 alias allcolors='(x=`tput op` y=`printf %80s`;for i in {0..255};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done)'
@@ -17,24 +11,35 @@ clangmake() {
     CXX=clang CXXFLAGS+=" -std=c++14 -Wall -Wextra -Wshadow -pedantic -c" make $1 && rm $1
 }
 
-# Pass in which host to close the connection to
-alias sshclose='ssh -O exit'
-
-if [[ "$OSTYPE" != "darwin"* ]]; then
-    alias xargs='xargs -r'
-fi
-
 alias :e=$EDITOR
 alias e=$EDITOR
+
+alias hc=herbstclient
+
+alias jcops="jc-cli --ops"
+
+alias servit='python2 -m SimpleHTTPServer 8000'
+
+# Pass in which host to close the connection to
+alias sshclose='ssh -O exit'
 
 if [[ $(command -v nvim) ]]; then
     alias vim=nvim
 fi
 
-# By default I don't care to search through minified files
-alias ag="ag --width 120"
+if [[ $(command -v wordgrinder) ]]; then
+    alias wg=wordgrinder
+fi
 
-alias jcops="jc-cli --ops"
+# alphabetized under X
+# Change your X keyboard layout
+alias dvorak='setxkbmap dvorak'
+alias ppdv='setxkbmap ppdv'
+alias qwerty='setxkbmap us'
+
+if [[ "$OSTYPE" != "darwin"* ]]; then
+    alias xargs='xargs -r'
+fi
 
 alias xz="xz $XZ_OPTS"
 

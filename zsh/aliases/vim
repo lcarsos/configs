@@ -1,0 +1,1 @@
+alias vimconf="vim ~/.config/nvim/init.vim"
