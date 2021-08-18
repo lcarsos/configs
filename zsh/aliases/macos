@@ -1,0 +1,6 @@
+# I cannot describe to you the depths of how much I despise MacOS. How is it
+# possible in 2021 that rebooting a mac, without unplugging or replugging
+# anything that it completely forgets everything about what monitors have ever
+# been attached? It's unfathomable to me. The bleating sheep say "it juuuust
+# wooooorks". Bite me.
+unfuckmacmonitors='displayplacer "id:EDA204B3-9954-4DFB-4C73-13AC25EFA9E2 res:1920x1200 color_depth:4 scaling:on origin:(0,0) degree:0" "id:E7897433-7138-3F86-11EC-8949001A2DDA res:3200x1800 hz:119 color_depth:8 scaling:on origin:(-5360,0) degree:0" "id:F4DA1A86-C97F-2172-899B-A4C0552039E8 res:2160x3840 hz:60 color_depth:8 scaling:off origin:(-7520,-35) degree:90" "id:1A832786-C80A-7C9A-977B-2AE1152640B7 res:2160x3840 hz:60 color_depth:8 scaling:off origin:(-2160,0) degree:90"'
