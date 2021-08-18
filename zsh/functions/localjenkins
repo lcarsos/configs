@@ -6,7 +6,7 @@ reseed() {
     local ci_system jenkins_url crumb_res crumb_header addl_opts current_branch
 
     # TODO refactor this to be local to work machine, not on public github
-    ci_system="pt-mobile"
+    ci_system="mobile-ios"
     if [[ $# -gt 0 ]]; then
         current_branch=$1
     else
