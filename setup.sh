@@ -2,7 +2,7 @@
 
 # A setup script for new machines to uniformly setup new machines.
 
-configdir=${CONFIG_DIR:~/c}
+configdir=~/c
 
 mkdir -p ~/.config
 
