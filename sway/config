@@ -22,7 +22,6 @@ set $menu bemenu-run | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
@@ -33,9 +32,11 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 set $disp1 DP-3
 set $disp2 DP-2
 set $disp3 DP-1
+set $disp4 HDMI-A-1
 
-output 'Dell Inc. DELL P2415Q Y9PCD4CK0MHL' {
+output 'Dell Inc. DELL P2415Q 59JJ463R06NL' {
     scale 1.2
+    mode 3840x2160
     transform 270
     position 0,0
 }
@@ -43,11 +44,18 @@ output 'Acer Technologies XV273K 0x00009584' {
     scale 1
     position 1800,0
     mode 3840x2160@119.910Hz
+    adaptive_sync on
 }
-output 'Dell Inc. DELL P2415Q 59JJ463R06NL' {
+output 'Dell Inc. DELL P2415Q Y9PCD4CK0MHL' {
     scale 1.2
+    mode 3840x2160
     transform 0
     position 5640,0
+}
+output 'Unknown ASUS MB16AMT L5LMTF005738' {
+    scale 1.0
+    transform 270
+    position 2880,2160
 }
 
 ### Idle configuration
@@ -65,10 +73,8 @@ output 'Dell Inc. DELL P2415Q 59JJ463R06NL' {
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 exec swayidle -w \
-    timeout 300 'light -O; light -S 3' \
-         resume 'light -I' \
-    timeout 600 'swaymsg "output * dpms off"' \
-         resume 'swaymsg "output * dpms on"; light -I'
+    timeout 900 'swaymsg "output * dpms off"' \
+         resume 'swaymsg "output * dpms on"'
 
 ### Input configuration
 #
@@ -84,7 +90,7 @@ exec swayidle -w \
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input * xkb_layout "us"
-input * xkb_variant "dvorak"
+#input * xkb_variant "dvorak"
 input * xkb_options "compose:menu,caps:ctrl_modifier"
 input * xkb_numlock enabled
 
@@ -94,6 +100,7 @@ input * tap enabled
 input * tap_button_map lrm
 
 input "1386:18698:Wacom_HID_490A_Finger" map_to_output eDP-1
+input "3823:49152:eGalax_Inc._eGalaxTouch_EXC3200-2505-09.00.00.00" map_to_output "Unknown\ ASUS\ MB16AMT\ L5LMTF005738"
 
 ### Key bindings
 #
@@ -143,10 +150,12 @@ bindsym $mod+Shift+e exit
     bindsym $mod+F1 focus output $disp1
     bindsym $mod+F2 focus output $disp2
     bindsym $mod+F3 focus output $disp3
+    bindsym $mod+F4 focus output $disp4
 
     bindsym $mod+Shift+F1 move workspace to output $disp1
     bindsym $mod+Shift+F2 move workspace to output $disp2
     bindsym $mod+Shift+F3 move workspace to output $disp3
+    bindsym $mod+Shift+F4 move workspace to output $disp4
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
@@ -263,7 +272,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %H:%M:%S %p'; do sleep 1; done
+    status_command while ~/.config/sway/status.sh; do sleep 4; done
 
     colors {
         statusline #ffffff
@@ -271,5 +280,9 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
+
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec_always fcitx5 -d --replace
+exec ~/.config/sway/bg-shuffle.sh
 
 include /etc/sway/config.d/*
