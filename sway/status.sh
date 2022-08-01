@@ -18,9 +18,10 @@ calcBattery() {
 }
 
 volume=$(ponymix is-muted && { echo "--" } || { ponymix get-volume })
-battery=${calcBattery}
+battery=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | rg percentage | awk '{ print $2; }')
+time_remaining=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | rg "time to" | cut -d':' -f 2 | sed 's/^ *//')
 stardate=$(stardate)
 timestamp=$(date +'%Y-%m-%d %H:%M')
 dayOfWeek=$(japaneseDayOfWeek)
 
-echo "${volume} | ${battery} | $stardate | (${dayOfWeek}) $timestamp"
+echo "${volume} | ${time_remaining} (${battery}) | $stardate | (${dayOfWeek}) $timestamp"
