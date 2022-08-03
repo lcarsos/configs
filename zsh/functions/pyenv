@@ -1,6 +1,6 @@
 # eval "$(pyenv init -)"
 # cached on 2020-10-14 on ASSETMOODLOST
-export PATH="/Users/ezekiel.chopper/.pyenv/shims:${PATH}"
+export PATH="${HOME}/.pyenv/shims:${PATH}"
 export PYENV_SHELL=nvim
 command pyenv rehash 2>/dev/null
 pyenv() {
@@ -20,7 +20,11 @@ pyenv() {
 
 # eval "$(pyenv virtualenv-init -)"
 # cached on 2020-10-14 on ASSETMOODLOST
-export PATH="/usr/local/Cellar/pyenv-virtualenv/1.1.5/shims:${PATH}";
+if [[ $(uname) == "Darwin" ]]; then
+    export PATH="/usr/local/Cellar/pyenv-virtualenv/1.1.5/shims:${PATH}";
+else
+    export PATH="/opt/pyenv/plugins/pyenv-virtualenv/shims:${PATH}";
+fi
 export PYENV_VIRTUALENV_INIT=1;
 _pyenv_virtualenv_hook() {
   local ret=$?
