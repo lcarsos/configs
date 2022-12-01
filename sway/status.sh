@@ -6,6 +6,11 @@ japaneseDayOfWeek() {
     LANG=ja_JP.UTF-8 date +'%a'
 }
 
+loadAvgs() {
+    local load=($(tr ' ' '\n' < /proc/loadavg | head -n 3))
+    echo ${load[1]}/${load[2]}/${load[3]}
+}
+
 calcBattery() {
     local bat_state=$(upower-i /org/freedesktop/UPower/devices/battery_BAT0 | rg 'state' | awk '{ print $2; }')
     local percentage=$(upower-i /org/freedesktop/UPower/devices/battery_BAT0 | rg 'percentage' | awk '{ print $2; }')
@@ -23,5 +28,6 @@ time_remaining=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | rg "ti
 stardate=$(stardate)
 timestamp=$(date +'%Y-%m-%d %H:%M')
 dayOfWeek=$(japaneseDayOfWeek)
+loadAvg=$(loadAvgs)
 
-echo "${volume} | ${time_remaining} (${battery}) | $stardate | (${dayOfWeek}) $timestamp"
+echo "${loadAvg} | ${volume} | ${time_remaining} (${battery}) | $stardate | (${dayOfWeek}) $timestamp"
