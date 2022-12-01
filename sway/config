@@ -58,6 +58,11 @@ output 'Unknown ASUS MB16AMT L5LMTF005738' {
     position 2880,2160
 }
 
+
+# wake up the internal display
+bindsym $mod+Shift+Ctrl+r output $disp1 toggle
+bindsym $mod+F12 output * dpms on
+
 ### Idle configuration
 #
 # Example configuration:
