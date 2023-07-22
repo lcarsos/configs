@@ -85,6 +85,7 @@ exec swayidle -w \
     timeout 600 'swaymsg "output * dpms off"' \
         resume 'swaymsg "output * dpms on"; light -I'
 
+exec ~/.config/sway/init-brightnessbar.sh
 exec ~/.config/sway/init-volumebar.sh
 exec redshift -c ~/.config/redshift.ini
 
@@ -115,8 +116,12 @@ input "1:1:AT_Translated_Set_2_keyboard" {
 bindsym XF86AudioMute exec ~/.local/bin/toggle-volume.sh
 bindsym XF86AudioRaiseVolume exec ~/.local/bin/increase-volume.sh
 bindsym XF86AudioLowerVolume exec ~/.local/bin/decrease-volume.sh
-bindsym XF86MonBrightnessUp exec   light -A 3
-bindsym XF86MonBrightnessDown exec light -U 3
+bindsym XF86MonBrightnessUp exec   ~/.local/bin/increase-brightness.sh
+bindsym XF86MonBrightnessDown exec ~/.local/bin/decrease-brightness.sh
+
+bindsym Print exec grim
+bindsym $mod+Print exec ~/.local/bin/scrrect
+
 
 #input * scroll_factor 1.3
 

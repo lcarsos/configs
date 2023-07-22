@@ -19,6 +19,11 @@ DISPLAYS=$(swaymsg --type get_outputs --raw | jq --raw-output '.[] |select(.acti
 WALLPAPER_DIR="$HOME/m/i/startrek"
 CACHE_DIR="$HOME/.cache/sway"
 
+if [[ ! -d "$CACHE_DIR" ]]
+then
+	mkdir -p "$CACHE_DIR"
+fi
+
 
 killall swaybg # Kill swaybg before assigning wallpaper
 
