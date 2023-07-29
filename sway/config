@@ -29,11 +29,6 @@ set $menu bemenu-run | xargs swaymsg exec --
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
-set $disp1 eDP-1
-set $disp2 DP-2
-set $disp3 DP-1
-set $disp4 HDMI-A-1
-
 output eDP-1 {
     scale 1
 }
@@ -50,11 +45,11 @@ output 'Acer Technologies XV273K 0x00009584' {
     mode 3840x2160@119.910Hz
     adaptive_sync on
 }
-output 'Dell Inc. DELL P2415Q Y9PCD4CK0MHL' {
-    scale 1.2
-    mode 3840x2160
-    transform 0
+output 'GIGA-BYTE TECHNOLOGY CO., LTD. M27U 23063B000344' {
+    adaptive_sync on
+    mode 3840x2160@150Hz
     position 5640,0
+    transform 0
 }
 output 'Unknown ASUS MB16AMT L5LMTF005738' {
     scale 1.0
@@ -68,10 +63,7 @@ bindsym $mod+Shift+Ctrl+r output $disp1 toggle
 bindsym $mod+F12 output * dpms on
 
 include idle
-
-exec ~/.config/sway/init-brightnessbar.sh
-exec ~/.config/sway/init-volumebar.sh
-exec redshift -c ~/.config/redshift.ini
+include monitor
 
 ### Input configuration
 #
@@ -106,11 +98,6 @@ bindsym XF86MonBrightnessDown exec ~/.local/bin/decrease-brightness.sh
 
 bindsym Print exec grim
 bindsym $mod+Print exec ~/.local/bin/scrrect
-
-
-#input * scroll_factor 1.3
-
-
 
 ### Key bindings
 #
@@ -274,24 +261,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-    font "Source Code Pro Normal 16"
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while ~/.config/sway/status.sh; do sleep 4; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+include status
 
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 exec_always fcitx5 -d --replace

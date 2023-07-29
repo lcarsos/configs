@@ -27,6 +27,8 @@ mkdir $SWAY_DIR
 ln -s "$configdir/sway/config" $SWAY_DIR/config
 ln -s "$configdir/sway/idle-$HOSTNAME" $SWAY_DIR/idle
 ln -s "$configdir/sway/input-$HOSTNAME" $SWAY_DIR/input
+ln -s "$configdir/sway/monitor-$HOSTNAME" $SWAY_DIR/monitor
+ln -s "$configdir/sway/status-$HOSTNAME" $SWAY_DIR/status
 make_sway_symlink init-brightnessbar.sh
 make_sway_symlink init-volumebar.sh
 make_sway_symlink status.sh

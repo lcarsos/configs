@@ -1,0 +1,10 @@
+set $disp1 eDP-1
+set $disp2 DP-2
+set $disp3 DP-1
+set $disp4 HDMI-A-1
+
+exec ~/.config/sway/init-brightnessbar.sh
+exec ~/.config/sway/init-volumebar.sh
+exec redshift -c ~/.config/redshift.ini
+
+# vim: set ft=swayconfig
