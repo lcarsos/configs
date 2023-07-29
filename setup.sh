@@ -11,8 +11,8 @@ ln -s "$configdir/config/user-dirs.dirs" ~/.config/user-dirs.dirs
 
 ln -s "$configdir/tmux.conf" ~/.tmux.conf
 
-ln -s "$configdir/zsh" ~/.zsh
-ln -s "~/.zsh/zshrc" ~/.zshrc
+ln -s -T "$configdir/zsh" ~/.zsh
+ln -s "$configdir/zsh/zshrc" ~/.zshrc
 
 ### SWAY ##################
 
