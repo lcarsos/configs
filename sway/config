@@ -29,10 +29,14 @@ set $menu bemenu-run | xargs swaymsg exec --
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
-set $disp1 DP-3
+set $disp1 eDP-1
 set $disp2 DP-2
 set $disp3 DP-1
 set $disp4 HDMI-A-1
+
+output eDP-1 {
+    scale 1
+}
 
 output 'Dell Inc. DELL P2415Q 59JJ463R06NL' {
     scale 1.2
@@ -63,27 +67,7 @@ output 'Unknown ASUS MB16AMT L5LMTF005738' {
 bindsym $mod+Shift+Ctrl+r output $disp1 toggle
 bindsym $mod+F12 output * dpms on
 
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' \
-#               resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-exec swayidle -w \
-    timeout 60  'light -O; light -T 0.5' \
-        resume 'light -I' \
-    timeout 300 'light -T 0.05' \
-        resume 'light -I' \
-    timeout 600 'swaymsg "output * dpms off"' \
-        resume 'swaymsg "output * dpms on"; light -I'
+include idle
 
 exec ~/.config/sway/init-brightnessbar.sh
 exec ~/.config/sway/init-volumebar.sh
@@ -105,13 +89,14 @@ exec redshift -c ~/.config/redshift.ini
 
 input type:keyboard {
     xkb_options "compose:menu,caps:ctrl_modifier"
-    xkb_numlock enabled
 }
 
 input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_layout "us"
     xkb_variant "dvorak"
 }
+
+include input
 
 bindsym XF86AudioMute exec ~/.local/bin/toggle-volume.sh
 bindsym XF86AudioRaiseVolume exec ~/.local/bin/increase-volume.sh
@@ -125,12 +110,7 @@ bindsym $mod+Print exec ~/.local/bin/scrrect
 
 #input * scroll_factor 1.3
 
-input type:touchpad {
-    accel_profile adaptive
-    pointer_accel 0.1
-    tap enabled
-    tap_button_map lrm
-}
+
 
 ### Key bindings
 #
@@ -300,6 +280,7 @@ bindsym $mod+r mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
+    font "Source Code Pro Normal 16"
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.

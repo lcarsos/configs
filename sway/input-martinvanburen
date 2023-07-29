@@ -1,0 +1,14 @@
+input type:touchpad {
+    #accel_profile adaptive
+    #pointer_accel 0.1
+    tap enabled
+    middle_emulation enabled
+    #tap_button_map lrm
+}
+
+# Trigger mouse buttons
+input "12068:309:Mouse_for_Windows" {
+    left_handed enabled
+}
+
+# vim: set ft=swayconfig
