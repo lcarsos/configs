@@ -3,4 +3,6 @@ set $disp2 DP-2
 set $disp3 DP-1
 set $disp4 HDMI-A-1
 
+exec ~/.config/sway/init-volumebar.sh
+
 # vim: set ft=swayconfig
