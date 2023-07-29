@@ -32,4 +32,15 @@ make_sway_symlink init-volumebar.sh
 make_sway_symlink status.sh
 make_sway_symlink bg-shuffle.sh
 
+### KITTY #################
 
+make_kitty_symlink() {
+    local scriptname=$1
+    #local machinespecific=${2:no}
+    ln -s "$configdir/kitty/$scriptname" $KITTY_DIR/$scriptname
+}
+
+KITTY_DIR=~/.config/kitty
+mkdir $KITTY_DIR
+make_kitty_symlink kitty.conf
+ln -s "$configdir/kitty/font-$HOSTNAME.conf" $SWAY_DIR/font.conf
