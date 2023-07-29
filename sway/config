@@ -81,11 +81,13 @@ include monitor
 
 input type:keyboard {
     xkb_options "compose:menu,caps:ctrl_modifier"
+    xkb_numlock enabled
 }
 
 input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_layout "us"
     xkb_variant "dvorak"
+    xkb_numlock disabled
 }
 
 include input
