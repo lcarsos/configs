@@ -202,6 +202,9 @@ bindsym $mod+Shift+Ctrl+e exit
 #
 # Layout stuff:
 #
+    font pango:monospace 0
+    titlebar_border_thickness 0
+    titlebar_padding 1
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
