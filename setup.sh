@@ -39,10 +39,10 @@ make_sway_symlink bg-shuffle.sh
 make_kitty_symlink() {
     local scriptname=$1
     #local machinespecific=${2:no}
-    ln -s "$configdir/kitty/$scriptname" $KITTY_DIR/$scriptname
+    ln -s "$configdir/config/kitty/$scriptname" $KITTY_DIR/$scriptname
 }
 
 KITTY_DIR=~/.config/kitty
 mkdir $KITTY_DIR
 make_kitty_symlink kitty.conf
-ln -s "$configdir/kitty/font-$HOSTNAME.conf" $SWAY_DIR/font.conf
+ln -s "$configdir/config/kitty/font-$HOSTNAME.conf" $KITTY_DIR/font.conf
