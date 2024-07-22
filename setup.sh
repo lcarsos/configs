@@ -37,12 +37,23 @@ make_sway_symlink bg-shuffle.sh
 ### KITTY #################
 
 make_kitty_symlink() {
-    local scriptname=$1
+    local scriptname=${1%.conf}
     #local machinespecific=${2:no}
-    ln -s "$configdir/config/kitty/$scriptname" $KITTY_DIR/$scriptname
+    if [ -f "$KITTY_DIR/$scriptname.conf" ]; then
+        rm "$KITTY_DIR/$scriptname.conf"
+    fi
+
+    if [ -f "$configdir/config/kitty/$scriptname-$HOSTNAME.conf" ]; then
+        ln -s "$configdir/config/kitty/$scriptname-$HOSTNAME.conf" "$KITTY_DIR/$scriptname.conf"
+    elif [ -f "$configdir/config/kitty/$scriptname.conf" ]; then
+        ln -s "$configdir/config/kitty/$scriptname.conf" "$KITTY_DIR/$scriptname.conf"
+    else
+        >&2 echo "No kitty config found for ${scriptname}.conf"
+    fi
 }
 
 KITTY_DIR=~/.config/kitty
 mkdir $KITTY_DIR
 make_kitty_symlink kitty.conf
-ln -s "$configdir/config/kitty/font-$HOSTNAME.conf" $KITTY_DIR/font.conf
+make_kitty_symlink theme.conf
+make_kitty_symlink font.conf
