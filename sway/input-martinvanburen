@@ -11,4 +11,9 @@ input "12068:309:Mouse_for_Windows" {
     left_handed enabled
 }
 
+input "1390:342:ELECOM_Relacon_Mouse" {
+    accel_profile flat
+    pointer_accel 0.0000001
+}
+
 # vim: set ft=swayconfig

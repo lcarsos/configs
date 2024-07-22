@@ -5,6 +5,6 @@ set $disp4 HDMI-A-1
 
 exec ~/.config/sway/init-brightnessbar.sh
 exec ~/.config/sway/init-volumebar.sh
-exec redshift -c ~/.config/redshift.ini
+exec gammastep
 
 # vim: set ft=swayconfig

@@ -22,6 +22,15 @@ calcBattery() {
     fi
 }
 
+ipAddr() {
+    local addr=$(ip addr show dev wlp1s0 | grep -w inet | awk '{ print $2; }')
+    if [ $addr -z ]; then
+        echo "wifi down"
+    else
+        echo $addr
+    fi
+}
+
 volume=$(ponymix is-muted && { echo "--" } || { ponymix get-volume })
 battery=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | rg percentage | awk '{ print $2; }')
 time_remaining=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | rg "time to" | cut -d':' -f 2 | sed 's/^ *//')
@@ -29,5 +38,6 @@ stardate=$(stardate)
 timestamp=$(date +'%Y-%m-%d %H:%M')
 dayOfWeek=$(japaneseDayOfWeek)
 loadAvg=$(loadAvgs)
+ip=$(ipAddr)
 
-echo "${loadAvg} | ${volume} | ${time_remaining} (${battery}) | $stardate | (${dayOfWeek}) $timestamp"
+echo "${loadAvg} | ${volume} | ${ip} | ${time_remaining} (${battery}) | $stardate | (${dayOfWeek}) $timestamp"
