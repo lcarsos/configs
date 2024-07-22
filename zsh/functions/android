@@ -5,4 +5,8 @@ if [[ -d ~/.android/avd ]]; then
     export ANDROID_AVD_HOME=~/.android/avd
 fi
 
+init_android() {
+    export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools
+}
+
 # vim: ft=zsh
