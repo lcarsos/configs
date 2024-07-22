@@ -116,6 +116,7 @@ elif [[ `command -v urxvt` ]]; then
 fi
 
 export LC_COLLATE=C
+export _JAVA_AWT_WM_NONREPARENTING=1
 export XZ_OPTS="--threads=0"
 export XDG_CONFIG_HOME=$HOME/.config
 
