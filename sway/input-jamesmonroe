@@ -1,2 +1,11 @@
+input "1386:222:Wacom_Bamboo_16FG_4x5_Pad" {
+    map_to_output $disp2
+    left_handed enabled
+}
+
+input "1386:222:Wacom_Bamboo_16FG_4x5_Pen" {
+    map_to_output $disp2
+    left_handed enabled
+}
 
 # vim: set ft=swayconfig

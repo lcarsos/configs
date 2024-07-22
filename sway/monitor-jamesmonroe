@@ -5,4 +5,4 @@ set $disp4 HDMI-A-1
 
 exec ~/.config/sway/init-volumebar.sh
 
-# vim: set ft=swayconfig
+# vim: set ft=swayconfig:

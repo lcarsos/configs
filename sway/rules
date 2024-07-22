@@ -1,0 +1,10 @@
+assign [class="[sS]team"] workspace "steam"
+
+# Projects
+assign [class="^[sS]eptambicDDR"] workspace "touch"
+assign [workspace="touch"] output HDMI-A-1
+
+# Godot
+for_window [instance="Godot_Editor" title="(?<!Godot Engine)$"] floating enable
+
+# vim: ft=swayconfig
