@@ -1,3 +1,0 @@
-alias lp='lpass show --password --clip --basic-regexp'
-
-# vim: set ft=sh:

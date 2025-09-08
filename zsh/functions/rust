@@ -1,5 +1,7 @@
-if [[ -d ~/.cargo/bin ]]; then
-    export PATH=~/.cargo/bin:$PATH
-fi
+init_cargo() {
+    if [[ -d ~/.cargo/bin ]]; then
+        export PATH=~/.cargo/bin:$PATH
+    fi
+}
 
 # vim: ft=sh

@@ -14,10 +14,6 @@ clangmake() {
 alias :e=$EDITOR
 alias e=$EDITOR
 
-alias hc=herbstclient
-
-alias jcops="jc-cli --ops"
-
 alias servit='python2 -m SimpleHTTPServer 8000'
 
 # Pass in which host to close the connection to
@@ -31,16 +27,10 @@ if [[ $(command -v wordgrinder) ]]; then
     alias wg=wordgrinder
 fi
 
-# alphabetized under X
-# Change your X keyboard layout
-alias dvorak='setxkbmap dvorak'
-alias ppdv='setxkbmap ppdv'
-alias qwerty='setxkbmap us'
-
 if [[ "$OSTYPE" != "darwin"* ]]; then
     alias xargs='xargs -r'
 fi
 
-alias xz="xz $XZ_OPTS"
+#alias xz="xz $XZ_OPTS"
 
 # vim: set ft=sh:

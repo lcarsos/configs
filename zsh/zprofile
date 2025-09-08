@@ -1,0 +1,5 @@
+# Login shells
+eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(zoxide init zsh)"
+
+# vim: ft=zsh

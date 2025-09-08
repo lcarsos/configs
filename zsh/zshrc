@@ -1,3 +1,4 @@
+# Interactive shells
 # set up colors in man pages
 man() {
     env \
@@ -113,15 +114,6 @@ elif [[ `command -v urxvtc` ]]; then
     export TERMINAL=urxvtc
 elif [[ `command -v urxvt` ]]; then
     export TERMINAL=urxvt
-fi
-
-export LC_COLLATE=C
-export _JAVA_AWT_WM_NONREPARENTING=1
-export XZ_OPTS="--threads=0"
-export XDG_CONFIG_HOME=$HOME/.config
-
-if [ -d "$HOME/.local/bin" ]; then
-    export PATH="$HOME/.local/bin:$PATH"
 fi
 
 ############## IMPORTS #################
