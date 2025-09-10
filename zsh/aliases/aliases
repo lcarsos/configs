@@ -33,4 +33,6 @@ fi
 
 #alias xz="xz $XZ_OPTS"
 
+alias year="cal -vymwc 12"
+
 # vim: set ft=sh:

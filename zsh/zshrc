@@ -92,11 +92,11 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git hg
 zstyle ':vcs_info:*:*' check-for-changes true
 zstyle ':vcs_info:*:*' get-revision true
-zstyle ':vcs_info:*' formats "[%m%u%c][%{$fg[yellow]%}%7.7i%{$reset_color%}][%b]"
+zstyle ':vcs_info:*' formats "[%m%u%c|%{$fg[yellow]%}%7.7i%{$reset_color%}][%b]"
 
 ## Prompt styling
 PROMPT="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%3~/ %{$reset_color%}%# "
-RPROMPT='${vcs_info_msg_0_}[%D{%H:%M}][$(printf "%.3f" $(stardate))][%?]'
+RPROMPT='${KNAMESPACE:+(kn=$KNAMESPACE)}${vcs_info_msg_0_}[%D{%H:%M}][$(printf "%.3f" $(stardate))][%?]'
 
 ############## EXPORTS #################
 

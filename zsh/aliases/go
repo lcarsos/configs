@@ -1,0 +1,2 @@
+# Fix go developers being assholes
+export GOPATH=$HOME/.local/share/go
