@@ -65,7 +65,7 @@ input '3823:49152:eGalax_Inc._eGalaxTouch_EXC3200-2505-09.00.00.00' map_to_outpu
 
 
 # wake up the internal display
-bindsym $mod+Shift+Ctrl+r output $disp1 toggle
+bindsym $mod+Shift+Ctrl+r output eDP-1 enable
 bindsym $mod+F12 output * dpms on
 
 include idle
@@ -96,6 +96,10 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_numlock disabled
 }
 
+input "1452:613:Apple_Inc._Magic_Trackpad" {
+    natural_scroll disabled
+}
+
 include input
 
 bindsym XF86AudioMute exec ~/.local/bin/toggle-volume.sh
@@ -107,8 +111,8 @@ bindsym XF86AudioPlay exec playerctl -i "firefox" play-pause
 bindsym XF86AudioPrev exec playerctl -i "firefox" previous
 bindsym XF86AudioNext exec playerctl -i "firefox" next
 
-bindsym Print exec grim
-bindsym $mod+Print exec ~/.local/bin/scrrect
+bindsym Print exec ~/.local/bin/scrrect
+bindsym $mod+Print exec grim
 
 ### Key bindings
 #
