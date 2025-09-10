@@ -11,6 +11,17 @@ loadAvgs() {
     echo ${load[1]}/${load[2]}/${load[3]}
 }
 
+memUsage() {
+    local vals=($(cat /proc/meminfo | head -n 5 | awk '{ print $2; }'))
+    local total=${vals[1]}
+    local free=${vals[2]}
+    local cache=${vals[5]}
+    local used=$(dc <<< "$total $free $cache + - p")
+    local used_pct=$(dc <<< "1 k 100 $used * $total / p")
+    local used_G=$(dc <<< "1 k $used 1024 1024 * / p")
+    echo "${used_pct}% ${used_G}G"
+}
+
 calcBattery() {
     local bat_state=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | rg 'state' | awk '{ print $2; }')
     local percentage=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | rg 'percentage' | awk '{ print $2; }')
@@ -23,21 +34,23 @@ calcBattery() {
 }
 
 ipAddr() {
-    local addr=$(ip addr show dev wlp1s0 | grep -w inet | awk '{ print $2; }')
-    if [ $addr -z ]; then
+    local devices=($(ip a | grep -E "^[0-9]+: (enp|wlp)" | awk '{ gsub(/:/, "", $2); print $2 }'))
+    local addr=$(for dev in $devices; do ip addr show dev $dev | grep -w inet | awk '{ print $2; }'; done)
+    if [[ $addr == "" ]]; then
         echo "wifi down"
     else
         echo $addr
     fi
 }
 
-volume=$(ponymix is-muted && { echo "--" } || { ponymix get-volume })
+volume=$(wpctl get-volume @DEFAULT_SINK@ | awk '{ print $2 }')
 battery=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | rg percentage | awk '{ print $2; }')
 time_remaining=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | rg "time to" | cut -d':' -f 2 | sed 's/^ *//')
 stardate=$(stardate)
 timestamp=$(date +'%Y-%m-%d %H:%M')
 dayOfWeek=$(japaneseDayOfWeek)
 loadAvg=$(loadAvgs)
+ramUsed=$(memUsage)
 ip=$(ipAddr)
 
-echo "${loadAvg} | ${volume} | ${ip} | ${time_remaining} (${battery}) | $stardate | (${dayOfWeek}) $timestamp"
+echo "${loadAvg} | ${ramUsed} | ${volume} | ${ip} | ${time_remaining} (${battery}) | $stardate | (${dayOfWeek}) $timestamp"

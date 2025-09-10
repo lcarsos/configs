@@ -33,28 +33,33 @@ output eDP-1 {
     scale 1
 }
 
-output 'Dell Inc. DELL P2415Q 59JJ463R06NL' {
-    scale 1.2
-    mode 3840x2160
+output 'GIGA-BYTE TECHNOLOGY CO., LTD. M27U 23463B000001' {
+    mode 3840x2160@150Hz
     transform 270
-    position 0,0
+    position 0,1440
+    adaptive_sync on
 }
 output 'Acer Technologies XV273K 0x04910584' {
     scale 1
-    position 1800,0
+    position 2160,1440
     mode 3840x2160@119.910Hz
     adaptive_sync on
 }
 output 'GIGA-BYTE TECHNOLOGY CO., LTD. M27U 23063B000344' {
     adaptive_sync on
     mode 3840x2160@150Hz
-    position 5640,0
+    position 6000,1440
+    adaptive_sync on
     transform 90
 }
 output 'ASUSTek COMPUTER INC ASUS MB16AMT L5LMTF005738' {
     scale 1.0
     transform 270
     position 1800,2160
+}
+output 'Ancor Communications Inc ASUS PB277 0x00033744' {
+    scale 1.0
+    position 2160,0
 }
 input '3823:49152:eGalax_Inc._eGalaxTouch_EXC3200-2505-09.00.00.00' map_to_output 'ASUSTek COMPUTER INC ASUS MB16AMT L5LMTF005738'
 
@@ -98,6 +103,9 @@ bindsym XF86AudioRaiseVolume exec ~/.local/bin/increase-volume.sh
 bindsym XF86AudioLowerVolume exec ~/.local/bin/decrease-volume.sh
 bindsym XF86MonBrightnessUp exec   ~/.local/bin/increase-brightness.sh
 bindsym XF86MonBrightnessDown exec ~/.local/bin/decrease-brightness.sh
+bindsym XF86AudioPlay exec playerctl -i "firefox" play-pause
+bindsym XF86AudioPrev exec playerctl -i "firefox" previous
+bindsym XF86AudioNext exec playerctl -i "firefox" next
 
 bindsym Print exec grim
 bindsym $mod+Print exec ~/.local/bin/scrrect
@@ -108,7 +116,7 @@ bindsym $mod+Print exec ~/.local/bin/scrrect
 #
 # Start a terminal
 bindsym $mod+Return exec $term
-bindsym $mod+b exec MOZ_ENABLE_WAYLAND=1 firefox
+bindsym $mod+b exec firefox
 
 # Kill focused window
 bindsym $mod+Shift+c kill
@@ -183,6 +191,33 @@ bindsym $mod+Shift+Ctrl+e exit
     bindsym $mod+9 workspace 9
     bindsym $mod+0 workspace 10
 
+    bindsym $mod+Alt+a workspace a
+    bindsym $mod+Alt+b workspace b
+    bindsym $mod+Alt+c workspace c
+    bindsym $mod+Alt+d workspace d
+    bindsym $mod+Alt+e workspace e
+    bindsym $mod+Alt+f workspace f
+    bindsym $mod+Alt+g workspace g
+    bindsym $mod+Alt+h workspace h
+    bindsym $mod+Alt+i workspace i
+    bindsym $mod+Alt+j workspace j
+    bindsym $mod+Alt+k workspace k
+    bindsym $mod+Alt+l workspace l
+    bindsym $mod+Alt+m workspace m
+    bindsym $mod+Alt+n workspace n
+    bindsym $mod+Alt+o workspace o
+    bindsym $mod+Alt+p workspace p
+    bindsym $mod+Alt+q workspace q
+    bindsym $mod+Alt+r workspace r
+    bindsym $mod+Alt+s workspace s
+    bindsym $mod+Alt+t workspace t
+    bindsym $mod+Alt+u workspace u
+    bindsym $mod+Alt+v workspace v
+    bindsym $mod+Alt+w workspace w
+    bindsym $mod+Alt+x workspace x
+    bindsym $mod+Alt+y workspace y
+    bindsym $mod+Alt+z workspace z
+
     bindsym $mod+Comma workspace prev_on_output
     bindsym $mod+Period workspace next_on_output
     bindsym $mod+Backspace workspace back_and_forth
@@ -198,6 +233,33 @@ bindsym $mod+Shift+Ctrl+e exit
     bindsym $mod+Shift+8 move container to workspace 8
     bindsym $mod+Shift+9 move container to workspace 9
     bindsym $mod+Shift+0 move container to workspace 10
+
+    bindsym $mod+Alt+Shift+a move container to workspace a
+    bindsym $mod+Alt+Shift+b move container to workspace b
+    bindsym $mod+Alt+Shift+c move container to workspace c
+    bindsym $mod+Alt+Shift+d move container to workspace d
+    bindsym $mod+Alt+Shift+e move container to workspace e
+    bindsym $mod+Alt+Shift+f move container to workspace f
+    bindsym $mod+Alt+Shift+g move container to workspace g
+    bindsym $mod+Alt+Shift+h move container to workspace h
+    bindsym $mod+Alt+Shift+i move container to workspace i
+    bindsym $mod+Alt+Shift+j move container to workspace j
+    bindsym $mod+Alt+Shift+k move container to workspace k
+    bindsym $mod+Alt+Shift+l move container to workspace l
+    bindsym $mod+Alt+Shift+m move container to workspace m
+    bindsym $mod+Alt+Shift+n move container to workspace n
+    bindsym $mod+Alt+Shift+o move container to workspace o
+    bindsym $mod+Alt+Shift+p move container to workspace p
+    bindsym $mod+Alt+Shift+q move container to workspace q
+    bindsym $mod+Alt+Shift+r move container to workspace r
+    bindsym $mod+Alt+Shift+s move container to workspace s
+    bindsym $mod+Alt+Shift+t move container to workspace t
+    bindsym $mod+Alt+Shift+u move container to workspace u
+    bindsym $mod+Alt+Shift+v move container to workspace v
+    bindsym $mod+Alt+Shift+w move container to workspace w
+    bindsym $mod+Alt+Shift+x move container to workspace x
+    bindsym $mod+Alt+Shift+y move container to workspace y
+    bindsym $mod+Alt+Shift+z move container to workspace z
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
