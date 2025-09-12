@@ -33,7 +33,7 @@ alias gfomm='git fetch origin master:master'
 gdummypush() { ga . && gc -m '.' && git push }
 
 # History and depth diving
-alias gd='git diff'
+alias gd='git diff -w'
 alias gdq='git diff --name-only'
 alias gl='git log --oneline --graph'
 alias glm='git log --oneline --graph master..'
@@ -107,5 +107,8 @@ gbcleanup() {
     git push --delete origin $branch
     git branch -D $branch
 }
+
+# Make an alias for github cli since they were rude enough to not consider my list of aliases *pout*
+alias gg=$(type -p gh | awk '{ print $3 }')
 
 # vim: set ft=sh:
