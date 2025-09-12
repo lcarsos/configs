@@ -35,4 +35,6 @@ fi
 
 alias year="cal -vymwc 12"
 
+alias ruffemup="ruff format && ruff check --fix"
+
 # vim: set ft=sh:
