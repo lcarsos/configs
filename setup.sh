@@ -53,6 +53,8 @@ config_sway() {
     make_sway_symlink init-volumebar.sh
     make_sway_symlink status.sh
     make_sway_symlink bg-shuffle.sh
+    mkdir ~/.xkb/symbols
+    ln -s "$configdir/sway/ppdv.xkb" ~/.xkb/symbols/us
 }
 
 ### KITTY #################

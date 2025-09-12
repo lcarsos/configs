@@ -6,6 +6,13 @@ input type:touchpad {
     #tap_button_map lrm
 }
 
+# Built-in keyboard
+input "1:1:AT_Translated_Set_2_keyboard" {
+    xkb_layout "us"
+    xkb_variant "ppdv"
+    xkb_numlock disabled
+}
+
 # Trigger mouse buttons
 input "12068:309:Mouse_for_Windows" {
     left_handed enabled

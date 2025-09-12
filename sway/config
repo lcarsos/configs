@@ -90,12 +90,6 @@ input type:keyboard {
     xkb_numlock enabled
 }
 
-input "1:1:AT_Translated_Set_2_keyboard" {
-    xkb_layout "us"
-    xkb_variant "dvorak"
-    xkb_numlock disabled
-}
-
 input "1452:613:Apple_Inc._Magic_Trackpad" {
     natural_scroll disabled
 }
