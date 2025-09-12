@@ -106,15 +106,15 @@ else
     export EDITOR=vim
 fi
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    export TERMINAL=iterm
-elif [[ `command -v alacritty` ]]; then
-    export TERMINAL=alacritty
-elif [[ `command -v urxvtc` ]]; then
-    export TERMINAL=urxvtc
-elif [[ `command -v urxvt` ]]; then
-    export TERMINAL=urxvt
-fi
+#if [[ "$OSTYPE" == "darwin"* ]]; then
+#    export TERMINAL=iterm
+#elif [[ `command -v alacritty` ]]; then
+#    export TERMINAL=alacritty
+#elif [[ `command -v urxvtc` ]]; then
+#    export TERMINAL=urxvtc
+#elif [[ `command -v urxvt` ]]; then
+#    export TERMINAL=urxvt
+#fi
 
 ############## IMPORTS #################
 
