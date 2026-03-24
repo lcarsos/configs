@@ -1,0 +1,5 @@
+if [ $(uname) == "Darwin" ]; then
+    alias espansoconf="$EDITOR ~/Library/Application\ Support/espanso/match/base.yml"
+fi
+
+# vim: set ft=zsh:
