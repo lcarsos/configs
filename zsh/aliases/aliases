@@ -1,9 +1,8 @@
-# By default I don't care to search through minified files
-alias ag="ag --width 120"
-
+################# A ###
 # Print out all the colors your terminal can access
 alias allcolors='(x=`tput op` y=`printf %80s`;for i in {0..255};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done)'
 
+################# C ###
 # this function (should, it doesn't work completely) builds a specified file
 # with clang to get clang build output, which is sometimes clearer, and also
 # colored
@@ -11,30 +10,38 @@ clangmake() {
     CXX=clang CXXFLAGS+=" -std=c++14 -Wall -Wextra -Wshadow -pedantic -c" make $1 && rm $1
 }
 
+################# E ###
 alias :e=$EDITOR
 alias e=$EDITOR
 
+################# R ###
+alias ruffemup="ruff format && ruff check --fix"
+
+################# S ###
 alias servit='python2 -m SimpleHTTPServer 8000'
 
 # Pass in which host to close the connection to
 alias sshclose='ssh -O exit'
 
+################# T ###
+alias tf=terraform
+
+################# V ###
 if [[ $(command -v nvim) ]]; then
     alias vim=nvim
 fi
 
+################# W ###
 if [[ $(command -v wordgrinder) ]]; then
     alias wg=wordgrinder
 fi
 
+################# X ###
 if [[ "$OSTYPE" != "darwin"* ]]; then
     alias xargs='xargs -r'
 fi
 
-#alias xz="xz $XZ_OPTS"
-
+################# Y ###
 alias year="cal -vymwc 12"
-
-alias ruffemup="ruff format && ruff check --fix"
 
 # vim: set ft=sh:
