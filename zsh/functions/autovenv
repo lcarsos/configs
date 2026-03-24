@@ -1,0 +1,17 @@
+# If .venv directory exists in any parent directory, activate the virtual environment in it.
+autovenv() {
+  local start="$PWD"
+  local dir="$PWD"
+  while [[ "$dir" != "/" ]]; do
+    if [[ -d "$dir/.venv" ]]; then
+      source "$dir/.venv/bin/activate"
+      cd "$start"
+      return
+    fi
+    cd ..
+    dir="$PWD"
+  done
+  cd "$start"
+}
+
+# vim: set filetype=zsh

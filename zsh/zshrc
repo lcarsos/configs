@@ -129,3 +129,5 @@ resource_configs() {
 }
 
 resource_configs
+
+autovenv
