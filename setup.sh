@@ -62,8 +62,8 @@ config_sway() {
 config_aerospace() {
     AEROSPACE_DIR=~/.config/aerospace
     mkdir $AEROSPACE_DIR
-    ln -s "$configdir/aerospace/aerospace.toml" $AEROSPACE_DIR/aerospace.toml
-    ln -s "$configdir/aerospace/pip-move.py" $AEROSPACE_DIR/pip-move.py
+    ln -s "$configdir/config/aerospace/aerospace.toml" $AEROSPACE_DIR/aerospace.toml
+    ln -s "$configdir/config/aerospace/pip-move.py" $AEROSPACE_DIR/pip-move.py
 }
 
 ### KITTY #################
@@ -94,10 +94,10 @@ config_kitty() {
 
 ### Do Configure ##########
 
-basicconfig
-config_tmux
-config_zsh
-config_kitty
+# basicconfig
+# config_tmux
+# config_zsh
+# config_kitty
 if [[ $OSTYPE == "darwin"* ]]; then
     config_aerospace
 fi
