@@ -1,5 +1,9 @@
 # Login shells
-if [[ "$OSTYPE" == "darwin"* ]]; then
+
+
+if [[ "$OSTYPE" != "darwin"* ]]; then
+    export QT_QPA_PLATFORM=wayland
+else
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 if [[ $(command -v zoxide) ]]; then
