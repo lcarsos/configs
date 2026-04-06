@@ -8,4 +8,9 @@ input "1386:222:Wacom_Bamboo_16FG_4x5_Pen" {
     left_handed enabled
 }
 
+input "1155:22288:STMicroelectronics_obins_anne_keyboard" {
+    xkb_layout us
+    xkb_variant dvorak
+}
+
 # vim: set ft=swayconfig
