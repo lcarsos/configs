@@ -66,6 +66,14 @@ config_aerospace() {
     ln -s "$configdir/config/aerospace/pip-move.py" $AEROSPACE_DIR/pip-move.py
 }
 
+### HYPRLAND ##############
+
+config_hypr() {
+    HYPRLAND_DIR=~/.config/hypr
+    mkdir $HYPRLAND_DIR
+    ln -s "$configdir/hypr/hyprland.lua" "$HYPRLAND_DIR/hyprland.lua"
+}
+
 ### KITTY #################
 
 make_kitty_symlink() {
@@ -89,15 +97,17 @@ config_kitty() {
     mkdir $KITTY_DIR
     make_kitty_symlink kitty.conf
     make_kitty_symlink theme.conf
-    make_kitty_symlink font.conf
+    # make_kitty_symlink font.conf
 }
 
 ### Do Configure ##########
 
-# basicconfig
-# config_tmux
-# config_zsh
-# config_kitty
+basicconfig
+config_tmux
+config_zsh
 if [[ $OSTYPE == "darwin"* ]]; then
     config_aerospace
+else
+    config_hypr
 fi
+#config_kitty
