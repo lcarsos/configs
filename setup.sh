@@ -71,7 +71,7 @@ config_aerospace() {
 config_hypr() {
     HYPRLAND_DIR=~/.config/hypr
     mkdir $HYPRLAND_DIR
-    ln -s "$configdir/hypr/hyprland.lua" "$HYPRLAND_DIR/hyprland.lua"
+    ln -s "$configdir/config/hypr/hyprland.lua" "$HYPRLAND_DIR/hyprland.lua"
 }
 
 ### KITTY #################
