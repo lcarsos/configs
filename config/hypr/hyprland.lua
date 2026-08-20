@@ -50,6 +50,8 @@ local menu        = "wofi --show drun"
 --   hl.exec_cmd("waybar & hyprpaper & firefox")
 -- end)
 
+require('hypridle')
+
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----

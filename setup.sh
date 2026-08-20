@@ -71,6 +71,8 @@ config_aerospace() {
 config_hypr() {
     HYPRLAND_DIR=~/.config/hypr
     mkdir $HYPRLAND_DIR
+    ln -s "$configdir/config/hypr/hypridle.$HOSTNAME.conf" $HYPRLAND_DIR/hypridle.conf || true
+    ln -s "$configdir/config/hypr/hypridle.$HOSTNAME.lua" $HYPRLAND_DIR/hypridle.lua
     ln -s "$configdir/config/hypr/hyprland.lua" "$HYPRLAND_DIR/hyprland.lua"
 }
 
@@ -110,4 +112,4 @@ if [[ $OSTYPE == "darwin"* ]]; then
 else
     config_hypr
 fi
-#config_kitty
+config_kitty
