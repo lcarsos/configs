@@ -107,6 +107,7 @@ bindsym XF86AudioNext exec playerctl -i "firefox" next
 
 bindsym Print exec ~/.local/bin/scrrect
 bindsym $mod+Print exec grim
+bindsym $mod+Ctrl+Print ~/.local/bin/scrdesktop
 
 ### Key bindings
 #
@@ -121,6 +122,10 @@ bindsym $mod+Shift+c kill
 
 # Start your launcher
 bindsym $mod+Space exec $menu
+
+
+bindsym $mod+c exec wl-copy
+bindsym $mod+v exec wl-paste
 
 
 # Drag floating windows by holding down $mod and left mouse button.
@@ -269,7 +274,7 @@ bindsym $mod+Shift+Ctrl+e exit
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+v splitv
+    bindsym $mod+s splitv
     bindsym $mod+z splith
 
     # Switch the current container between different layout styles
