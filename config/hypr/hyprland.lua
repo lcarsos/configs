@@ -114,7 +114,7 @@ hl.config({
 
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
-        inactive_opacity = 1.0,
+        inactive_opacity = 0.7,
 
         shadow = {
             enabled      = true,
@@ -362,3 +362,8 @@ hl.window_rule({
     move  = "20 monitor_h-120",
     float = true,
 })
+
+-- This gets screen share working
+hl.on("hyprland.start", function ()
+  hl.exec_cmd('dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP')
+end)
