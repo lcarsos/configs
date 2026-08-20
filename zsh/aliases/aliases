@@ -16,6 +16,8 @@ alias e=$EDITOR
 
 ################# R ###
 alias ruffemup="ruff format && ruff check --fix"
+alias rsp="rsync -az --info=progress"
+alias rspp="rsync -az --info=progress2"
 
 ################# S ###
 alias servit='python2 -m SimpleHTTPServer 8000'
