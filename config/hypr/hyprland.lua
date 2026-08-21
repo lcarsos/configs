@@ -336,10 +336,10 @@ hl.bind(mainMod .. " + F2", hl.dsp.focus({ monitor = disp2 }))
 hl.bind(mainMod .. " + F3", hl.dsp.focus({ monitor = disp3 }))
 hl.bind(mainMod .. " + F4", hl.dsp.focus({ monitor = disp4 }))
 
-hl.bind(mainMod .. " + SHIFT + F1", hl.dsp.workspace.move_to_monitor(disp1))
-hl.bind(mainMod .. " + SHIFT + F2", hl.dsp.workspace.move_to_monitor(disp2))
-hl.bind(mainMod .. " + SHIFT + F3", hl.dsp.workspace.move_to_monitor(disp3))
-hl.bind(mainMod .. " + SHIFT + F4", hl.dsp.workspace.move_to_monitor(disp4))
+hl.bind(mainMod .. " + SHIFT + F1", hl.dsp.workspace.move({ monitor = disp1 }))
+hl.bind(mainMod .. " + SHIFT + F2", hl.dsp.workspace.move({ monitor = disp2 }))
+hl.bind(mainMod .. " + SHIFT + F3", hl.dsp.workspace.move({ monitor = disp3 }))
+hl.bind(mainMod .. " + SHIFT + F4", hl.dsp.workspace.move({ monitor = disp4 }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
