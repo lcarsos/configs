@@ -22,6 +22,61 @@ hl.monitor({
     scale    = 1.175,
 })
 
+hl.monitor({
+    output   = "eDP-1",
+    mode     = "preferred",
+    position = "auto",
+    scale    = 1,
+})
+
+hl.monitor({
+    output    = "desc:GIGA-BYTE TECHNOLOGY CO., LTD. M27U 23463B000001",
+    mode      = "3840x2160@150",
+    position  = "0x1440",
+    scale     = 1,
+    transform = 3,
+    vrr       = 1,
+})
+
+hl.monitor({
+    output   = "desc:Acer Technologies XV273K 0x04910584",
+    mode     = "3840x2160@119.910",
+    position = "2160x1440",
+    scale    = 1,
+    vrr      = 1,
+})
+
+hl.monitor({
+    output    = "desc:GIGA-BYTE TECHNOLOGY CO., LTD. M27U 23063B000344",
+    mode      = "3840x2160@150",
+    position  = "6000x1440",
+    scale     = 1,
+    transform = 1,
+    vrr       = 1,
+})
+
+hl.monitor({
+    output    = "desc:ASUSTek COMPUTER INC ASUS MB16AMT L5LMTF005738",
+    mode      = "preferred",
+    position  = "1800x2160",
+    scale     = 1.0,
+    transform = 3,
+})
+
+hl.monitor({
+    output   = "desc:Ancor Communications Inc ASUS PB277 0x00033744",
+    mode     = "preferred",
+    position = "2160x0",
+    scale    = 1.0,
+})
+
+hl.device({
+    name   = "egalax-inc.-egalaxtouch-exc3200-2505-09.00.00.00",
+    output = "desc:ASUSTek COMPUTER INC ASUS MB16AMT L5LMTF005738",
+})
+
+__require('monitors')
+
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -275,6 +330,16 @@ hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+
+hl.bind(mainMod .. " + F1", hl.dsp.focus({ monitor = disp1 }))
+hl.bind(mainMod .. " + F2", hl.dsp.focus({ monitor = disp2 }))
+hl.bind(mainMod .. " + F3", hl.dsp.focus({ monitor = disp3 }))
+hl.bind(mainMod .. " + F4", hl.dsp.focus({ monitor = disp4 }))
+
+hl.bind(mainMod .. " + SHIFT + F1", hl.dsp.workspace.move_to_monitor(disp1))
+hl.bind(mainMod .. " + SHIFT + F2", hl.dsp.workspace.move_to_monitor(disp2))
+hl.bind(mainMod .. " + SHIFT + F3", hl.dsp.workspace.move_to_monitor(disp3))
+hl.bind(mainMod .. " + SHIFT + F4", hl.dsp.workspace.move_to_monitor(disp4))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
