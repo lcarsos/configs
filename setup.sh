@@ -74,6 +74,7 @@ config_hypr() {
     ln -s "$configdir/config/hypr/hypridle.$HOSTNAME.conf" $HYPRLAND_DIR/hypridle.conf || true
     ln -s "$configdir/config/hypr/hypridle.$HOSTNAME.lua" $HYPRLAND_DIR/hypridle.lua
     ln -s "$configdir/config/hypr/monitors-$HOSTNAME.lua" $HYPRLAND_DIR/monitors.lua
+    ln -s "$configdir/config/hypr/hyprpaper.conf" "$HYPRLAND_DIR/hyprpaper.conf"
     ln -s "$configdir/config/hypr/hyprland.lua" "$HYPRLAND_DIR/hyprland.lua"
 }
 
