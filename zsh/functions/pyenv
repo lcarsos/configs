@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 
-export PATH="/home/echo/.pyenv/shims:${PATH}"
+# check if string pyenv already in PATH
+if [[ ! "pyenv" =~ "$PATH" ]]; then
+    export PATH="$HOME/.pyenv/bin:${PATH}"
+fi
+
 export PYENV_SHELL=zsh
 
 init_pyenv() {
