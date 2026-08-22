@@ -1,15 +1,3 @@
--- This is an example Hyprland Lua config file.
--- Refer to the wiki for more information.
--- https://wiki.hypr.land/Configuring/Start/
-
--- Please note not all available settings / options are set here.
--- For a full list, see the wiki
-
--- You can (and should!!) split this configuration into multiple files
--- Create your files separately and then require them like this:
--- require("myColors")
-
-
 ------------------
 ---- MONITORS ----
 ------------------
@@ -94,6 +82,7 @@ local menu        = "wofi --show drun"
 --
 hl.on("hyprland.start", function ()
     hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("fcitx5 -d --replace")
 --   hl.exec_cmd(terminal)
 --   hl.exec_cmd("nm-applet")
 --   hl.exec_cmd("waybar & hyprpaper & firefox")
@@ -253,17 +242,6 @@ hl.config({
     },
 })
 
-----------------
-----  MISC  ----
-----------------
-
-hl.config({
-    misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
-    },
-})
-
 
 ---------------
 ---- INPUT ----
@@ -307,23 +285,38 @@ hl.device({
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + return", hl.dsp.exec_cmd(terminal))
-local closeWindowBind = hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
+-- hyprland exit
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+
+-- window management
+local closeWindowBind = hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
+hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+--hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind(mainMod .. " + O", function()
+    hl.dispatch(hl.dsp.window.tag({
+        tag = "opaque",
+        window = hl.get_active_window(),
+    }))
+end)
+
+-- Launch menu
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+
+-- Applications
+hl.bind(mainMod .. " + return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + K",    hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
 
 hl.bind(mainMod .. " + F1", hl.dsp.focus({ monitor = disp1 }))
 hl.bind(mainMod .. " + F2", hl.dsp.focus({ monitor = disp2 }))
@@ -420,6 +413,11 @@ hl.window_rule({
 
     move  = "20 monitor_h-120",
     float = true,
+})
+
+hl.window_rule({
+    match = { tag = "opaque" },
+    opacity = "1.0 override 1.0 override 1.0 override",
 })
 
 -- This gets screen share working
