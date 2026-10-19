@@ -111,4 +111,6 @@ gbcleanup() {
 # Make an alias for github cli since they were rude enough to not consider my list of aliases *pout*
 alias gg=$(type -p gh | awk '{ print $3 }')
 
+alias s='git spice'
+
 # vim: set ft=sh:

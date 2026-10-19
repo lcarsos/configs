@@ -1,2 +1,6 @@
 # Fix go developers being assholes
 export GOPATH=$HOME/.local/share/go
+
+if [ -e "$GOPATH/bin" ]; then
+  export PATH="$PATH:$GOPATH/bin"
+fi
